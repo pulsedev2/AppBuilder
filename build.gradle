@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+group 'fr.pulsedev'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'junit:junit:4.12'
+}
