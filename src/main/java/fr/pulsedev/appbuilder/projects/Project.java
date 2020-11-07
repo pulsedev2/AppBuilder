@@ -1,5 +1,6 @@
 package fr.pulsedev.appbuilder.projects;
 
+import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.projects.errors.ProjectDirIsNotEmpty;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.projects.errors.ProjectSelectedIsAFile;
@@ -24,7 +25,7 @@ public class Project {
 
     File directory;
     File appBuilderDir;
-    ProjectOptions options = new ProjectOptions();
+    ProjectOptions<String> options =  Main.options;
 
     /**
      *
@@ -93,19 +94,16 @@ public class Project {
         Document projectDocument = FileUtils.getDocument(projectXML);
         assert projectDocument != null;
         Element project = projectDocument.getDocumentElement();
-        this.options.setVersion(Double.parseDouble(project.getAttribute("version")));
         NodeList projectChild = project.getChildNodes();
         for (int i = 0; i < projectChild.getLength(); i++) {
             Node node = projectChild.item(i);
 
             if(node.getNodeType() == Node.ELEMENT_NODE){
                 Element element = (Element) node;
-
-                if (element.getNodeName().equals("name")){
-                    this.options.setName(element.getAttribute("value"));
-                }
+                this.options.set(element.getNodeName(), element.getAttribute("value"));
             }
         }
+        System.out.println(this.options.params.toString());
     }
 
     @SuppressWarnings("unused")
@@ -120,13 +118,15 @@ public class Project {
 
         // project Element with Version
         Element project = document.createElement("project");
-        project.setAttribute("version", String.valueOf(ProjectOptionType.VERSION.defaultValue));
+        project.setAttribute("version", String.valueOf(Main.EDITOR_VERSION));
         document.appendChild(project);
 
-        // Project Name Element
-        Element name = document.createElement("name");
-        name.setAttribute("value", (String) ProjectOptionType.NAME.defaultValue);
-        project.appendChild(name);
+        // Add all elements
+        for(String key : this.options.params.keySet()){
+            Element element = document.createElement(key);
+            element.setAttribute("value", String.valueOf(this.options.get(key)));
+            project.appendChild(element);
+        }
 
         // Create project.xml file
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
