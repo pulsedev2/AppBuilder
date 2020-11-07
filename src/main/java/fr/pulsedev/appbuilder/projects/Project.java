@@ -1,6 +1,5 @@
 package fr.pulsedev.appbuilder.projects;
 
-import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.projects.errors.ProjectDirIsNotEmpty;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.projects.errors.ProjectSelectedIsAFile;
@@ -8,6 +7,8 @@ import fr.pulsedev.appbuilder.projects.errors.ProjectXmlCorrupted;
 import fr.pulsedev.appbuilder.utils.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -64,7 +65,8 @@ public class Project {
     public Project(File directory) throws ProjectErrors {
         this.directory = directory;
         if(directory.isFile()) throw new ProjectSelectedIsAFile(this);
-        if (!FileUtils.isDirectoryEmpty(directory.toPath())) throw new ProjectDirIsNotEmpty(this);
+        System.out.println(directory);
+        if (directory.listFiles() != null && directory.listFiles().length != 0) throw new ProjectDirIsNotEmpty(this);
 
         try {
             this.init();
@@ -92,6 +94,18 @@ public class Project {
         assert projectDocument != null;
         Element project = projectDocument.getDocumentElement();
         this.options.setVersion(Double.parseDouble(project.getAttribute("version")));
+        NodeList projectChild = project.getChildNodes();
+        for (int i = 0; i < projectChild.getLength(); i++) {
+            Node node = projectChild.item(i);
+
+            if(node.getNodeType() == Node.ELEMENT_NODE){
+                Element element = (Element) node;
+
+                if (element.getNodeName().equals("name")){
+                    this.options.setName(element.getAttribute("value"));
+                }
+            }
+        }
     }
 
     @SuppressWarnings("unused")
@@ -105,9 +119,14 @@ public class Project {
         Document document = documentBuilder.newDocument();
 
         // project Element with Version
-        Element element = document.createElement("project");
-        element.setAttribute("version", String.valueOf(Main.VERSION));
-        document.appendChild(element);
+        Element project = document.createElement("project");
+        project.setAttribute("version", String.valueOf(ProjectOptionType.VERSION.defaultValue));
+        document.appendChild(project);
+
+        // Project Name Element
+        Element name = document.createElement("name");
+        name.setAttribute("value", (String) ProjectOptionType.NAME.defaultValue);
+        project.appendChild(name);
 
         // Create project.xml file
         TransformerFactory transformerFactory = TransformerFactory.newInstance();

@@ -13,9 +13,13 @@ public class FolderFilter extends FileFilter {
 
     @Override
     public boolean accept(File f) {
-        if(empty){
-            return f.isDirectory() && FileUtils.isDirectoryEmpty(f.toPath());
-        }else return f.isDirectory();
+        if(f.isDirectory()){
+            if(empty) {
+                return FileUtils.isDirectoryEmpty(f.toPath());
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

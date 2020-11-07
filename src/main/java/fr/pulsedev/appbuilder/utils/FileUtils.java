@@ -113,9 +113,11 @@ public class FileUtils {
      * @return true if the directory is empty and false if it's a not a proper directory or if it's not empty
      */
     public static boolean isDirectoryEmpty(Path directory){
+        if (!directory.toFile().isDirectory()) return false;
         try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(directory)) {
             return !dirStream.iterator().hasNext();
-        }catch (IOException ignored){
+        }catch (IOException e){
+            e.printStackTrace();
             return false;
         }
     }
