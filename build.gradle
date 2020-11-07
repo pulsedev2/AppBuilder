@@ -10,5 +10,6 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:19.0.0'
     compile 'junit:junit:4.12'
 }
