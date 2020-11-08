@@ -1,6 +1,4 @@
-package fr.pulsedev.appbuilder.UI.utils;
-
-import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
+package fr.pulsedev.appbuilder.UI;
 
 import javax.swing.*;
 import java.awt.*;

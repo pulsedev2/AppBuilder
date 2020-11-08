@@ -1,7 +1,7 @@
 package fr.pulsedev.appbuilder.UI.panels;
 
 import fr.pulsedev.appbuilder.Main;
-import fr.pulsedev.appbuilder.UI.utils.Window;
+import fr.pulsedev.appbuilder.UI.Window;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.utils.FolderFilter;
@@ -31,6 +31,7 @@ public class ProjectChooserPanel extends JPanel {
                     File file = fileChooser.getSelectedFile();
                     try {
                         Project.open(file);
+                        Main.editorWindow.run();
                     } catch (ProjectErrors projectErrors) {
                         projectErrors.printStackTrace();
                     }
@@ -43,7 +44,7 @@ public class ProjectChooserPanel extends JPanel {
                 if (returnedVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     Main.projectWindow.setVisible(false);
-                    Window popupWindow = new Window.Builder().setName("Test").setPanel(new popupPanel(file)).setResizable(false).createWindow();
+                    Window popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setResizable(false).createWindow();
                     popupWindow.run();
                 }
             }

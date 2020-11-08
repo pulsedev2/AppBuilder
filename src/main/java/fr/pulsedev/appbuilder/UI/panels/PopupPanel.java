@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.HashMap;
 
-public class popupPanel extends JPanel {
+public class PopupPanel extends JPanel {
 
     ProjectOptions<String> projectOptions = Main.options;
     HashMap<String, JTextField> components = new HashMap<>();
 
-    public popupPanel(File file){
+    public PopupPanel(File file){
 
         for(String key : projectOptions.params.keySet()){
             JLabel label = new JLabel("Enter " + key);
@@ -40,7 +40,7 @@ public class popupPanel extends JPanel {
                 }
             }
 
-            //TODO OPEN EDITOR
+            Main.editorWindow.run();
 
         };
 
