@@ -4,6 +4,8 @@ import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.Window;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
+import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.themes.Themes;
 import fr.pulsedev.appbuilder.utils.FolderFilter;
 
 import javax.swing.*;
@@ -54,6 +56,10 @@ public class ProjectChooserPanel extends JPanel {
 
         open.addActionListener(actionListener);
         create.addActionListener(actionListener);
+        open.setBackground(null);
+        open.setBorderPainted(false);
+        open.setBorder(null);
+        open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
         this.add(open);
         this.add(create);
     }

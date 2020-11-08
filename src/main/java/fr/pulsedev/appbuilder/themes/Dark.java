@@ -4,11 +4,11 @@ import java.awt.*;
 
 public class Dark extends Themes.ThemesInterface {
 
-    public static final Color BACKGROUND = Color.decode("#0D1B2A");
-    public static final Color LIGHTER_BACKGROUND = Color.decode("#1B263B");
-    public static final Color FOREGROUND = Color.decode("#E0E1DD");
-    public static final Color LIGHTER_FOREGROUND = Color.decode("#778DA9");
-    public static final Color TEXT = Color.decode("#415A77");
+    public static final Color BACKGROUND = new Color(13, 27, 42);
+    public static final Color LIGHTER_BACKGROUND = new Color(27, 38, 59);
+    public static final Color FOREGROUND = new Color(65, 90, 119);
+    public static final Color LIGHTER_FOREGROUND = new Color(119, 141, 169);
+    public static final Color TEXT = new Color(224, 225, 221);
 
 
     public Dark() {
