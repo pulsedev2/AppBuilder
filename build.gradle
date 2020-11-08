@@ -15,10 +15,17 @@ task('addVersion'){
     }
 }
 
+allprojects {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = '1.7'
+        targetCompatibility = '1.7'
+    } 
+}
+
 jar.dependsOn(addVersion)
 
 dependencies {
     implementation 'org.jetbrains:annotations:19.0.0'
-    compile 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
 }
 
