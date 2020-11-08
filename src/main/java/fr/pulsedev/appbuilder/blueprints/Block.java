@@ -120,8 +120,6 @@ public class Block {
     public List<Node<?>> getNodesByName(String name, boolean mode){
         return mode ? out.stream().filter(c -> c.getName().equals(name)).collect(Collectors.toList()) : in.stream().filter(c -> c.getName().equals(name)).collect(Collectors.toList());
     }
-    
-    
 
     /**
      * 

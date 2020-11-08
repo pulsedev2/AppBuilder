@@ -19,6 +19,6 @@ jar.dependsOn(addVersion)
 
 dependencies {
     implementation 'org.jetbrains:annotations:19.0.0'
-    compile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.7'
 }
 
