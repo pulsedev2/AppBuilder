@@ -2,13 +2,18 @@ package fr.pulsedev.appbuilder.settings;
 
 public class Language extends Settings{
 
-    private String language;
+    private String lang;
 
-    public Language(String language){
-        this.language = language;
+    public Language(String lang){
+        this.lang = lang;
     }
 
     public String getLang() {
-        return language;
+        return lang;
     }
+
+    public void setLanguage(String language){
+        this.lang = language;
+    }
+
 }
