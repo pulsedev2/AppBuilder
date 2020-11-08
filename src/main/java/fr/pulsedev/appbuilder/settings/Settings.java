@@ -2,6 +2,7 @@ package fr.pulsedev.appbuilder.settings;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.themes.Themes;
 
 import java.io.File;
@@ -15,14 +16,12 @@ public class Settings {
     private transient Gson gson;
     private Language language;
     private Theme theme;
-    private transient final File file = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/settings/settings.json");
+    private transient final File file = new File(Main.RESOURCES_PATH + "settings/settings.json");
 
     public static void init(){
-        File file = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/settings/settings.json");
-        System.out.println(Paths.get("").toAbsolutePath());
-        System.out.println(file.getAbsolutePath());
-        if(!new File(Paths.get("").toAbsolutePath() + "/src/main/resources/settings").exists()){
-            boolean ignored = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/settings").mkdir();
+        File file = new File(Main.RESOURCES_PATH + "settings/settings.json");
+        if(!new File(Main.RESOURCES_PATH + "settings").exists()){
+            boolean ignored = new File(Main.RESOURCES_PATH + "settings").mkdir();
         }
         if(!file.exists()){
             try {
@@ -34,7 +33,7 @@ public class Settings {
     }
 
     public static Settings getSettingsFromJSon(){
-        File file = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/settings/settings.json");
+        File file = new File(Main.RESOURCES_PATH + "settings/settings.json");
         try(FileReader reader = new FileReader(file)){
             Gson gson = new Gson();
             return gson.fromJson(reader, Settings.class);
@@ -45,7 +44,6 @@ public class Settings {
     }
 
     public void saveSettingsToJson(){
-        System.out.println(language.getLang());
         try(FileWriter writer = new FileWriter(file)){
             gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(this, writer);
