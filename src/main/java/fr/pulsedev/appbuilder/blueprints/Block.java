@@ -72,18 +72,12 @@ public class Block {
      * @see #getNodesByType(Class, boolean) 
      */
     public List<Node<?>> getNodesByType(Class<?> aClass){
-        List<Node<?>> correct = new ArrayList<>();
-        for(Node<?> node : in){
-            if (node.getClass().isInstance(aClass)){
-                correct.add(node);
-            }
-        }
-        
-        for(Node<?> node : out){
-            if (node.getClass().isInstance(aClass)){
-                correct.add(node);
-            }
-        }
+        List<Node<?>> correct = in.stream()
+                .filter(c -> c.getClass().isInstance(aClass))
+                .collect(Collectors.toList());
+        correct.addAll(out.stream()
+                .filter(c -> c.getClass().isInstance(aClass))
+                .collect(Collectors.toList()));
         
         return correct;
     }
@@ -96,22 +90,7 @@ public class Block {
      * @see #getNodesByType(Class) 
      */
     public List<Node<?>> getNodesByType(Class<?> aClass,  boolean out){
-        List<Node<?>> correct = new ArrayList<>();
-        if(!out) {
-            for (Node<?> node : in) {
-                if (node.getClass().isInstance(aClass)) {
-                    correct.add(node);
-                }
-            }
-        }else {
-            for (Node<?> node : this.out) {
-                if (node.getClass().isInstance(aClass)) {
-                    correct.add(node);
-                }
-            }
-        }
-
-        return correct;
+        return out ? this.out.stream().filter(c -> c.getClass().isInstance(aClass)).collect(Collectors.toList()) : in.stream().filter(c -> c.getClass().isInstance(aClass)).collect(Collectors.toList());
     }
 
     /**
@@ -139,18 +118,7 @@ public class Block {
      * @see #getNodesByType(Class) 
      */
     public List<Node<?>> getNodesByName(String name, boolean mode){
-        List<Node<?>> matching = new ArrayList<>();
-        if(mode){
-            matching.addAll(out.stream()
-                .filter(node -> node.getName().equals(name))
-                .collect(Collectors.toList()));
-        }else{
-            matching.addAll(in.stream()
-                .filter(node -> node.getName().equals(name))
-                .collect(Collectors.toList()));
-        }
-        
-        return matching;
+        return mode ? out.stream().filter(c -> c.getName().equals(name)).collect(Collectors.toList()) : in.stream().filter(c -> c.getName().equals(name)).collect(Collectors.toList());
     }
     
     

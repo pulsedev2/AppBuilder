@@ -3,8 +3,7 @@ package fr.pulsedev.appbuilder.blueprints;
 public class Node<A> {
 
     private final Block PARENT;
-    private A out;
-    private A in;
+    private final A value;
     private final boolean MODE;
     private final String NAME;
 
@@ -12,11 +11,7 @@ public class Node<A> {
         this.PARENT = parent;
         this.MODE = out;
         this.NAME = name;
-        if(out){
-            this.out = value;
-        }else{
-            this.in = value;
-        }
+        this.value = value;
     }
 
     public Block getParent() {
@@ -39,7 +34,6 @@ public class Node<A> {
         return NAME;
     }
 
-    public A getIn(){return in;}
-    public A getOut(){return out;}
+    public A getValue(){return value;}
 
 }
