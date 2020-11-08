@@ -17,8 +17,8 @@ task('addVersion'){
 
 allprojects {
     tasks.withType(JavaCompile) {
-        sourceCompatibility = '1.9'
-        targetCompatibility = '1.9'
+        sourceCompatibility = '15'
+        targetCompatibility = '15'
     } 
 }
 
