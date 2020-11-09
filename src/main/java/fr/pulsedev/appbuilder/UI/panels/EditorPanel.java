@@ -1,7 +1,5 @@
 package fr.pulsedev.appbuilder.UI.panels;
 
-import fr.pulsedev.appbuilder.UI.Window;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
