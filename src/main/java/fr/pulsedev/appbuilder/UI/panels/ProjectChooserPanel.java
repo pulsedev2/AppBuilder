@@ -38,6 +38,8 @@ public class ProjectChooserPanel extends JPanel {
         // Listener of open & create button
         ActionListener actionListener = e -> {
             if (e.getSource() == open){
+                fileChooser.resetChoosableFileFilters();
+                fileChooser.setAcceptAllFileFilterUsed(false);
                 fileChooser.setFileFilter(new FolderFilter(false));
                 int returnedVal = fileChooser.showDialog(ProjectChooserPanel.this, "Accept");
 
@@ -52,6 +54,8 @@ public class ProjectChooserPanel extends JPanel {
                 }
             }
             else if (e.getSource() == create){
+                fileChooser.resetChoosableFileFilters();
+                fileChooser.setAcceptAllFileFilterUsed(false);
                 fileChooser.setFileFilter(new FolderFilter(true));
                 int returnedVal = fileChooser.showDialog(ProjectChooserPanel.this, "Accept");
 
@@ -106,7 +110,6 @@ public class ProjectChooserPanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 close.setContentAreaFilled(true);
                 close.setBackground(Color.RED);
-                System.out.println("entered");
             }
 
             @Override
@@ -130,6 +133,18 @@ public class ProjectChooserPanel extends JPanel {
         closeImage = UiUtils.resize(closeImage, 15, 15);
         close.setIcon(new ImageIcon(closeImage));
 
+        // Crate image computing
+        BufferedImage createImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/new.png"));
+        UiUtils.changeColor(createImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+        createImage = UiUtils.resize(createImage, 15, 15);
+        create.setIcon(new ImageIcon(createImage));
+
+        // Crate image computing
+        BufferedImage openImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/open.png"));
+        UiUtils.changeColor(openImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+        openImage = UiUtils.resize(openImage, 15, 15);
+        open.setIcon(new ImageIcon(openImage));
+
         // Add All buttons
         this.add(open);
         this.add(create);
@@ -138,8 +153,8 @@ public class ProjectChooserPanel extends JPanel {
 
         // Set bounds
         close.setBounds(500 - 30,0,30,30);
-        open.setBounds(180, 250, 130, 20);
-        create.setBounds(180, 300, 130, 25);
+        open.setBounds(165, 250, 175, 20);
+        create.setBounds(170, 300, 150, 25);
         logo.setBounds(170,110,150,135);
     }
 }

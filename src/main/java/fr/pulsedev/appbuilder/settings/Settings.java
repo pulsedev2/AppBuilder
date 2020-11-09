@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Set;
 
 public class Settings {
 
@@ -29,6 +30,13 @@ public class Settings {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        if (Settings.getSettingsFromJSon() == null){
+            Settings temp = new Settings();
+            temp.setTheme(new Theme(Themes.DEFAULT));
+            temp.setLanguage(new Language("fr_FR"));
+            temp.saveSettingsToJson();
         }
     }
 

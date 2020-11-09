@@ -1,5 +1,7 @@
 package fr.pulsedev.appbuilder.UI;
 
+import fr.pulsedev.appbuilder.utils.UiUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,6 +36,10 @@ public class Window extends JFrame{
         this.setContentPane(this.panel);
 
         this.getContentPane().setBackground(color);
+
+        UiUtils.FrameDragListener frameDragListener = new UiUtils.FrameDragListener(this);
+        this.addMouseListener(frameDragListener);
+        this.addMouseMotionListener(frameDragListener);
 
         this.setVisible(true);
     }
