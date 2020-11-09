@@ -2,6 +2,7 @@ package fr.pulsedev.appbuilder.UI.panels;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.Window;
+import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;

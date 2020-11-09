@@ -1,6 +1,8 @@
-package fr.pulsedev.appbuilder.UI.panels;
+package fr.pulsedev.appbuilder.UI.panels.enums;
 
 import fr.pulsedev.appbuilder.UI.Window;
+import fr.pulsedev.appbuilder.UI.panels.EditorPanel;
+import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.themes.Themes;
 

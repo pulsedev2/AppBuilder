@@ -27,7 +27,6 @@ public class Window extends JFrame{
         this.setDefaultCloseOperation(constants);
         this.setResizable(resizable);
         this.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", true);
-
         this.setLocation(100, 100);
 
         this.setUndecorated(true);

@@ -20,13 +20,15 @@ public enum Themes {
         Color FOREGROUND;
         Color LIGHTER_FOREGROUND;
         Color TEXT;
+        Color HOVER_TEXT;
 
-        public ThemesInterface(Color BACKGROUND, Color LIGHTER_BACKGROUND, Color FOREGROUND, Color LIGHTER_FOREGROUND, Color TEXT) {
+        public ThemesInterface(Color BACKGROUND, Color LIGHTER_BACKGROUND, Color FOREGROUND, Color LIGHTER_FOREGROUND, Color TEXT, Color HOVER_TEXT) {
             this.BACKGROUND = BACKGROUND;
             this.LIGHTER_BACKGROUND = LIGHTER_BACKGROUND;
             this.FOREGROUND = FOREGROUND;
             this.LIGHTER_FOREGROUND = LIGHTER_FOREGROUND;
             this.TEXT = TEXT;
+            this.HOVER_TEXT = HOVER_TEXT;
         }
 
         public Color getBACKGROUND() {
@@ -47,6 +49,10 @@ public enum Themes {
 
         public Color getTEXT() {
             return TEXT;
+        }
+
+        public Color getHOVER_TEXT() {
+            return HOVER_TEXT;
         }
     }
 
