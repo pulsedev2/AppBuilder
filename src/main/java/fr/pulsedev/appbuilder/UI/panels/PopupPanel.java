@@ -35,7 +35,7 @@ public class PopupPanel extends JPanel {
 
         JLabel title = new JLabel("Project Information");
         title.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-        title.setFont(new Font("Dialong", Font.BOLD, 35));
+        title.setFont(new Font("Dialog", Font.BOLD, 35));
         JButton close = UiUtils.getCloseButton();
 
         for(String key : projectOptions.params.keySet()){
@@ -65,7 +65,7 @@ public class PopupPanel extends JPanel {
                 }
 
                 try {
-                    this.getParent().setVisible(false);
+                    SwingUtilities.getWindowAncestor(this).setVisible(false);
                     new Project(file);
                 } catch (ProjectErrors projectErrors) {
                     projectErrors.printStackTrace();

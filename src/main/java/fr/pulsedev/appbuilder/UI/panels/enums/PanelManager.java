@@ -15,7 +15,10 @@ public enum  PanelManager {
     EDITOR(new Window.Builder()
             .setName("Editor")
             .setPanel(new EditorPanel())
-            .setResizable(false)
+            .setResizable(true)
+            .setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND())
+            .setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()))
+            .setUnderdecorated(false)
             .createWindow()),
     PROJECT(new Window.Builder()
             .setName("Main")

@@ -13,14 +13,16 @@ public class Window extends JFrame{
     private final JPanel panel;
     private final boolean resizable;
     private final Color color;
+    private final boolean underdecorated;
 
-    public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color){
+    public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color, boolean underdecorated){
         this.size = size;
         this.name = name;
         this.resizable = resizable;
         this.constants = constants;
         this.panel = panel;
         this.color = color;
+        this.underdecorated = underdecorated;
     }
 
     public void run(){
@@ -31,7 +33,7 @@ public class Window extends JFrame{
         this.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", true);
         this.setLocation(100, 100);
 
-        this.setUndecorated(true);
+        this.setUndecorated(underdecorated);
 
         this.setContentPane(this.panel);
 
@@ -42,6 +44,10 @@ public class Window extends JFrame{
         this.addMouseMotionListener(frameDragListener);
 
         this.setVisible(true);
+    }
+
+    public boolean isDecorated(){
+        return !underdecorated;
     }
 
     public Dimension getSize() {
@@ -69,9 +75,10 @@ public class Window extends JFrame{
         private JPanel panel = null;
         private boolean resizable = true;
         private Color color = Color.WHITE;
+        private boolean underdecorated = true;
 
         public Window createWindow() {
-            return new Window(this.size, this.name, this.resizable, this.constants, this.panel, this.color);
+            return new Window(this.size, this.name, this.resizable, this.constants, this.panel, this.color, this.underdecorated);
         }
 
         public Builder setBackground(Color color){
@@ -81,6 +88,11 @@ public class Window extends JFrame{
 
         public Builder setSize(Dimension size) {
             this.size = size;
+            return this;
+        }
+
+        public Builder setUnderdecorated(boolean b){
+            this.underdecorated = b;
             return this;
         }
 

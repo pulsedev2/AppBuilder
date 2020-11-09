@@ -37,16 +37,16 @@ public class Block {
      * Add a input node to the List of this block
      * @param value is an Object which the node will receive
      */
-    public void addInNode(Object value, String name){
-        in.add(new Node<>(this, false, value, name));
+    public void addInNode(Object value, String name, Coordinates coordinates){
+        in.add(new Node<>(this, false, value, name, coordinates));
     }
 
     /**
      * Add an output node the List of this Block
      * @param value is an Object which the node will send through a {@link Link}
      */
-    public void addOutNode(Object value, String name){
-        out.add(new Node<>(this, true, value, name));
+    public void addOutNode(Object value, String name, Coordinates coordinates){
+        out.add(new Node<>(this, true, value, name, coordinates));
     }
 
     /**

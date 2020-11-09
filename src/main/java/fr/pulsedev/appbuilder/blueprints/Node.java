@@ -1,17 +1,21 @@
 package fr.pulsedev.appbuilder.blueprints;
 
+import fr.pulsedev.appbuilder.utils.Coordinates;
+
 public class Node<A> {
 
     private final Block PARENT;
-    private final A value;
+    private final A VALUE;
     private final boolean MODE;
     private final String NAME;
+    private final Coordinates COORDINATES;
 
-    public Node(Block parent, boolean out, A value, String name){
+    public Node(Block parent, boolean out, A value, String name, Coordinates coordinates){
         this.PARENT = parent;
+        this.COORDINATES = coordinates;
         this.MODE = out;
         this.NAME = name;
-        this.value = value;
+        this.VALUE = value;
     }
 
     public Block getParent() {
@@ -34,6 +38,10 @@ public class Node<A> {
         return NAME;
     }
 
-    public A getValue(){return value;}
+    public A getValue(){return VALUE;}
+
+    public Coordinates getCoordinates(){
+        return COORDINATES;
+    }
 
 }

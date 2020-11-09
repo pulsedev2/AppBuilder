@@ -47,6 +47,7 @@ public class ProjectChooserPanel extends JPanel {
                     File file = fileChooser.getSelectedFile();
                     try {
                         Project.open(file);
+                        SwingUtilities.getWindowAncestor(this).setVisible(false);
                         PanelManager.EDITOR.window.run();
                     } catch (ProjectErrors projectErrors) {
                         projectErrors.printStackTrace();
@@ -62,8 +63,7 @@ public class ProjectChooserPanel extends JPanel {
                 if (returnedVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     PanelManager.PROJECT.window.setVisible(false);
-                    Window popupWindow;
-                    popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND()).setResizable(false).createWindow();
+                    Window popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND()).setResizable(false).createWindow();
                     popupWindow.run();
                 }
             }
