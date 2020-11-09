@@ -3,7 +3,6 @@ package fr.pulsedev.appbuilder.blueprints;
 import fr.pulsedev.appbuilder.utils.Coordinates;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +10,7 @@ public class Block {
 
     private List<Node<?>> in = new ArrayList<>();
     private List<Node<?>> out = new ArrayList<>();
-    private Coordinates coord = new Coordinates();
+    private Coordinates coord;
 
     public Block(Coordinates coord){
         this.coord = coord;

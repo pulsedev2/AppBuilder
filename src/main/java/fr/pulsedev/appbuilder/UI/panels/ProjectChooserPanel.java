@@ -6,7 +6,6 @@ import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.settings.Settings;
-import fr.pulsedev.appbuilder.themes.Themes;
 import fr.pulsedev.appbuilder.utils.FolderFilter;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 

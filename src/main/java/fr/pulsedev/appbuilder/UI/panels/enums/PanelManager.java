@@ -4,11 +4,6 @@ import fr.pulsedev.appbuilder.UI.Window;
 import fr.pulsedev.appbuilder.UI.panels.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
 import fr.pulsedev.appbuilder.settings.Settings;
-import fr.pulsedev.appbuilder.themes.Themes;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 
 public enum  PanelManager {
 
