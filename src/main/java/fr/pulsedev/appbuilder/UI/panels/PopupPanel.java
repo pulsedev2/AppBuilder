@@ -7,6 +7,7 @@ import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.utils.UiUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,7 @@ public class PopupPanel extends JPanel {
         JLabel title = new JLabel("Project Information");
         title.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
         title.setFont(new Font("Dialong", Font.BOLD, 35));
+        JButton close = UiUtils.getCloseButton();
 
         for(String key : projectOptions.params.keySet()){
             i++;
@@ -92,9 +94,10 @@ public class PopupPanel extends JPanel {
         submit.addMouseListener(onSubmitHover);
         this.add(submit);
         this.add(title);
-        title.setBounds(95, 50, 325, 50);
+        this.add(close);
+        title.setBounds(95, 50, 350, 50);
         submit.setBounds(x_default_label - 45, y_default_label + (120*i), 150, 30);
-
+        close.setBounds(500 - 30,0,30,30);
     }
 
 }

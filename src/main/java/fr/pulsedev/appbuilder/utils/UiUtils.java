@@ -1,5 +1,8 @@
 package fr.pulsedev.appbuilder.utils;
 
+import fr.pulsedev.appbuilder.Main;
+import fr.pulsedev.appbuilder.settings.Settings;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -48,6 +51,40 @@ public class UiUtils {
         icon.paintIcon(null, g, 0,0);
         g.dispose();
         return bi;
+    }
+
+    public static JButton getCloseButton(){
+        JButton close = new JButton();
+
+        close.addActionListener(e -> {
+            if(e.getSource() == close){
+                System.exit(0);
+            }
+        });
+
+        close.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                close.setContentAreaFilled(true);
+                close.setBackground(Color.RED);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                UiUtils.makeJButtonTransparent(close);
+            }
+        });
+
+
+        UiUtils.makeJButtonTransparent(close);
+
+        // Close image computing
+        BufferedImage closeImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/close.png"));
+        UiUtils.changeColor(closeImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+        closeImage = UiUtils.resize(closeImage, 15, 15);
+        close.setIcon(new ImageIcon(closeImage));
+
+        return close;
     }
 
     public static class FrameDragListener extends MouseAdapter {

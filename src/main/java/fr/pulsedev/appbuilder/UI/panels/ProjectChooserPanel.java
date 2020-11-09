@@ -31,9 +31,9 @@ public class ProjectChooserPanel extends JPanel {
         // Init a JFileChooser
         JFileChooser fileChooser = new JFileChooser(desktop);
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        JButton close = new JButton();
         ImageIcon logoIcon = new ImageIcon(Main.RESOURCES_PATH + "images/logo.png");
         JLabel logo = new JLabel(logoIcon);
+        JButton close = UiUtils.getCloseButton();
 
         // Listener of open & create button
         ActionListener actionListener = e -> {
@@ -66,9 +66,6 @@ public class ProjectChooserPanel extends JPanel {
                     popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND()).setResizable(false).createWindow();
                     popupWindow.run();
                 }
-            }
-            else if (e.getSource() == close){
-                System.exit(0);
             }
         };
 
@@ -103,39 +100,18 @@ public class ProjectChooserPanel extends JPanel {
         // Action Listener
         open.addActionListener(actionListener);
         create.addActionListener(actionListener);
-        close.addActionListener(actionListener);
 
         // Mouse Listener
         open.addMouseListener(onHoverListener);
         create.addMouseListener(onHoverListener);
 
-        close.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                close.setContentAreaFilled(true);
-                close.setBackground(Color.RED);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                UiUtils.makeJButtonTransparent(close);
-            }
-        });
-
         // Make all Buttons Transparent
         UiUtils.makeJButtonTransparent(open);
         UiUtils.makeJButtonTransparent(create);
-        UiUtils.makeJButtonTransparent(close);
 
         // Change text color
         open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
         create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-
-        // Close image computing
-        BufferedImage closeImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/close.png"));
-        UiUtils.changeColor(closeImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-        closeImage = UiUtils.resize(closeImage, 15, 15);
-        close.setIcon(new ImageIcon(closeImage));
 
         // Crate image computing
         BufferedImage createImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/new.png"));
