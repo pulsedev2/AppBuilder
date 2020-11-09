@@ -65,8 +65,7 @@ public class Window extends JFrame{
     public static class Builder {
 
         private Dimension size = new Dimension(500, 500);
-        private String name = "Default name";
-        private int constants = JFrame.EXIT_ON_CLOSE;
+        private String name = "Default name";        private int constants = JFrame.EXIT_ON_CLOSE;
         private JPanel panel = null;
         private boolean resizable = true;
         private Color color = Color.WHITE;

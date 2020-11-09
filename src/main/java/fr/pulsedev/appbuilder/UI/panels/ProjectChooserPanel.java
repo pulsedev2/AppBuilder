@@ -62,8 +62,8 @@ public class ProjectChooserPanel extends JPanel {
                 if (returnedVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     PanelManager.PROJECT.window.setVisible(false);
-                    Window popupWindow = null;
-                    popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setBackground(Color.BLUE).setResizable(false).createWindow();
+                    Window popupWindow;
+                    popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND()).setResizable(false).createWindow();
                     popupWindow.run();
                 }
             }
@@ -77,9 +77,11 @@ public class ProjectChooserPanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 if(e.getSource() == open){
                     open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+                    open.setFont(new Font("Dialog", Font.BOLD, 15));
                 }
                 else if(e.getSource() == create){
                     create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+                    create.setFont(new Font("Dialog", Font.BOLD, 15));
                 }
             }
 
@@ -87,9 +89,11 @@ public class ProjectChooserPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
                 if(e.getSource() == open){
                     open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+                    open.setFont(new Font("Dialog", Font.PLAIN, 15));
                 }
                 else if(e.getSource() == create){
                     create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+                    create.setFont(new Font("Dialog", Font.PLAIN, 15));
                 }
             }
         };
