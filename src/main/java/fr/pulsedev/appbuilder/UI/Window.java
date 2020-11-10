@@ -15,6 +15,7 @@ public class Window extends JFrame{
     private final Color color;
     private final boolean undecorated;
     private final boolean draggable;
+    private boolean isRunning = false;
 
     public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color, boolean undecorated, boolean draggable){
         this.size = size;
@@ -28,26 +29,41 @@ public class Window extends JFrame{
     }
 
     public void run(){
-        this.setSize(size);
-        this.setName(name);
-        this.setDefaultCloseOperation(constants);
-        this.setResizable(resizable);
-        this.setLocation(100, 100);
-
-        this.setUndecorated(undecorated);
-
-        this.setContentPane(this.panel);
-
-        this.getContentPane().setBackground(color);
-
-        if(draggable) {
-            UiUtils.FrameDragListener frameDragListener = new UiUtils.FrameDragListener(this);
-            this.addMouseListener(frameDragListener);
-            this.addMouseMotionListener(frameDragListener);
-            this.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", true);
+        if(!this.isActive()){
+            isRunning = false;
         }
+        if(!isRunning && !this.isActive()) {
+            this.setSize(size);
+            this.setName(name);
+            this.setDefaultCloseOperation(constants);
+            this.setResizable(resizable);
+            this.setLocation(100, 100);
 
-        this.setVisible(true);
+            try{
+                this.setUndecorated(undecorated);
+            }catch (IllegalComponentStateException ignored){
+                this.dispose();
+                return;
+            }
+
+
+            this.setContentPane(this.panel);
+
+            this.getContentPane().setBackground(color);
+
+            if (draggable) {
+                UiUtils.FrameDragListener frameDragListener = new UiUtils.FrameDragListener(this);
+                this.addMouseListener(frameDragListener);
+                this.addMouseMotionListener(frameDragListener);
+                this.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", true);
+            }
+
+            this.setVisible(true);
+            isRunning = true;
+        }else {
+            this.dispose();
+            isRunning = false;
+        }
     }
 
     public boolean isDecorated(){

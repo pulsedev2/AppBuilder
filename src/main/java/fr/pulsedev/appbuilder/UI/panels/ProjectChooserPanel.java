@@ -33,6 +33,8 @@ public class ProjectChooserPanel extends JPanel {
         ImageIcon logoIcon = new ImageIcon(Main.RESOURCES_PATH + "images/logo.png");
         JLabel logo = new JLabel(logoIcon);
         JButton close = UiUtils.getCloseButton();
+        JButton settings = new JButton("Configure ...");
+        settings.setFont(new Font("Dialog", Font.PLAIN, 15));
 
         // Listener of open & create button
         ActionListener actionListener = e -> {
@@ -66,31 +68,23 @@ public class ProjectChooserPanel extends JPanel {
                     popupWindow.run();
                 }
             }
+            else if (e.getSource() == settings){
+                PanelManager.SETTINGS.window.run();
+            }
+
         };
 
         MouseListener onHoverListener = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(e.getSource() == open){
-                    open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
-                    open.setFont(new Font("Dialog", Font.BOLD, 15));
-                }
-                else if(e.getSource() == create){
-                    create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
-                    create.setFont(new Font("Dialog", Font.BOLD, 15));
-                }
+                ((JButton)e.getSource()).setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+                ((JButton)e.getSource()).setFont(new Font("Dialog", Font.BOLD, 15));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if(e.getSource() == open){
-                    open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-                    open.setFont(new Font("Dialog", Font.PLAIN, 15));
-                }
-                else if(e.getSource() == create){
-                    create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-                    create.setFont(new Font("Dialog", Font.PLAIN, 15));
-                }
+                ((JButton)e.getSource()).setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+                ((JButton)e.getSource()).setFont(new Font("Dialog", Font.PLAIN, 15));
             }
         };
 
@@ -99,41 +93,53 @@ public class ProjectChooserPanel extends JPanel {
         // Action Listener
         open.addActionListener(actionListener);
         create.addActionListener(actionListener);
+        settings.addActionListener(actionListener);
 
         // Mouse Listener
         open.addMouseListener(onHoverListener);
         create.addMouseListener(onHoverListener);
+        settings.addMouseListener(onHoverListener);
 
         // Make all Buttons Transparent
         UiUtils.makeJButtonTransparent(open);
         UiUtils.makeJButtonTransparent(create);
+        UiUtils.makeJButtonTransparent(settings);
 
         // Change text color
         open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
         create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+        settings.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
 
-        // Crate image computing
+        // Create image computing
         BufferedImage createImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/new.png"));
         UiUtils.changeColor(createImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
         createImage = UiUtils.resize(createImage, 15, 15);
         create.setIcon(new ImageIcon(createImage));
 
-        // Crate image computing
+        // Open image computing
         BufferedImage openImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/open.png"));
         UiUtils.changeColor(openImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
         openImage = UiUtils.resize(openImage, 15, 15);
         open.setIcon(new ImageIcon(openImage));
+
+        // Settings image computing
+        BufferedImage settingsImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/settings.png"));
+        UiUtils.changeColor(settingsImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+        settingsImage = UiUtils.resize(settingsImage, 15, 15);
+        settings.setIcon(new ImageIcon(settingsImage));
 
         // Add All buttons
         this.add(open);
         this.add(create);
         this.add(close);
         this.add(logo);
+        this.add(settings);
 
         // Set bounds
         close.setBounds(500 - 30,0,30,30);
         open.setBounds(165, 250, 175, 20);
         create.setBounds(170, 300, 150, 25);
         logo.setBounds(170,110,150,135);
+        settings.setBounds(500 - 150, 500 - 25, 150, 25);
     }
 }
