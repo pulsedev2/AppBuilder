@@ -5,6 +5,8 @@ import fr.pulsedev.appbuilder.UI.panels.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
 import fr.pulsedev.appbuilder.settings.Settings;
 
+import java.awt.*;
+
 public enum  PanelManager {
 
     EDITOR(new Window.Builder()
