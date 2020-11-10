@@ -2,6 +2,7 @@ package fr.pulsedev.appbuilder.utils;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.themes.Themes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +52,21 @@ public class UiUtils {
         icon.paintIcon(null, g, 0,0);
         g.dispose();
         return bi;
+    }
+
+    public static BufferedImage generateBackgroundImage(Themes theme){
+        BufferedImage bufferedImage = new BufferedImage(7680, 4320, BufferedImage.TYPE_INT_ARGB);
+        for (int y = 0; y < bufferedImage.getHeight(); y++) {
+            for (int x = 0; x < bufferedImage.getWidth(); x++) {
+                if(x%10 == 0 && y%10 == 0){
+                    bufferedImage.setRGB(x, y, theme.themesInterface.getLIGHTER_BACKGROUND().getRGB());
+                }else {
+                    bufferedImage.setRGB(x, y, theme.themesInterface.getBACKGROUND().getRGB());
+                }
+            }
+        }
+
+        return bufferedImage;
     }
 
     public static JButton getCloseButton(){

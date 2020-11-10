@@ -13,16 +13,18 @@ public class Window extends JFrame{
     private final JPanel panel;
     private final boolean resizable;
     private final Color color;
-    private final boolean underdecorated;
+    private final boolean undecorated;
+    private final boolean draggable;
 
-    public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color, boolean underdecorated){
+    public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color, boolean undecorated, boolean draggable){
         this.size = size;
         this.name = name;
         this.resizable = resizable;
         this.constants = constants;
         this.panel = panel;
         this.color = color;
-        this.underdecorated = underdecorated;
+        this.undecorated = undecorated;
+        this.draggable = draggable;
     }
 
     public void run(){
@@ -30,24 +32,30 @@ public class Window extends JFrame{
         this.setName(name);
         this.setDefaultCloseOperation(constants);
         this.setResizable(resizable);
-        this.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", true);
         this.setLocation(100, 100);
 
-        this.setUndecorated(underdecorated);
+        this.setUndecorated(undecorated);
 
         this.setContentPane(this.panel);
 
         this.getContentPane().setBackground(color);
 
-        UiUtils.FrameDragListener frameDragListener = new UiUtils.FrameDragListener(this);
-        this.addMouseListener(frameDragListener);
-        this.addMouseMotionListener(frameDragListener);
+        if(draggable) {
+            UiUtils.FrameDragListener frameDragListener = new UiUtils.FrameDragListener(this);
+            this.addMouseListener(frameDragListener);
+            this.addMouseMotionListener(frameDragListener);
+            this.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", true);
+        }
 
         this.setVisible(true);
     }
 
     public boolean isDecorated(){
-        return !underdecorated;
+        return !undecorated;
+    }
+
+    public boolean isDraggable(){
+        return draggable;
     }
 
     public Dimension getSize() {
@@ -71,14 +79,16 @@ public class Window extends JFrame{
     public static class Builder {
 
         private Dimension size = new Dimension(500, 500);
-        private String name = "Default name";        private int constants = JFrame.EXIT_ON_CLOSE;
+        private String name = "Default name";
+        private int constants = JFrame.EXIT_ON_CLOSE;
         private JPanel panel = null;
         private boolean resizable = true;
         private Color color = Color.WHITE;
-        private boolean underdecorated = true;
+        private boolean undecorated = true;
+        private boolean draggable = false;
 
         public Window createWindow() {
-            return new Window(this.size, this.name, this.resizable, this.constants, this.panel, this.color, this.underdecorated);
+            return new Window(this.size, this.name, this.resizable, this.constants, this.panel, this.color, this.undecorated, this.draggable);
         }
 
         public Builder setBackground(Color color){
@@ -91,8 +101,8 @@ public class Window extends JFrame{
             return this;
         }
 
-        public Builder setUnderdecorated(boolean b){
-            this.underdecorated = b;
+        public Builder setUndecorated(boolean b){
+            this.undecorated = b;
             return this;
         }
 
@@ -113,6 +123,11 @@ public class Window extends JFrame{
 
         public Builder setResizable(boolean b) {
             this.resizable = b;
+            return this;
+        }
+
+        public Builder setDraggable(boolean b){
+            this.draggable = b;
             return this;
         }
     }
