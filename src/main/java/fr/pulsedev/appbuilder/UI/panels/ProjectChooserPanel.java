@@ -6,6 +6,7 @@ import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.FolderFilter;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 
@@ -77,13 +78,13 @@ public class ProjectChooserPanel extends JPanel {
         MouseListener onHoverListener = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                ((JButton)e.getSource()).setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+                ((JButton)e.getSource()).setForeground(Theme.USER.themesInterface.getHOVER_TEXT());
                 ((JButton)e.getSource()).setFont(new Font("Dialog", Font.BOLD, 15));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                ((JButton)e.getSource()).setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+                ((JButton)e.getSource()).setForeground(Theme.USER.themesInterface.getTEXT());
                 ((JButton)e.getSource()).setFont(new Font("Dialog", Font.PLAIN, 15));
             }
         };
@@ -106,25 +107,25 @@ public class ProjectChooserPanel extends JPanel {
         UiUtils.makeJButtonTransparent(settings);
 
         // Change text color
-        open.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-        create.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
-        settings.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+        open.setForeground(Theme.USER.themesInterface.getTEXT());
+        create.setForeground(Theme.USER.themesInterface.getTEXT());
+        settings.setForeground(Theme.USER.themesInterface.getTEXT());
 
         // Create image computing
         BufferedImage createImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/new.png"));
-        UiUtils.changeColor(createImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+        UiUtils.changeColor(createImage, Color.BLACK, Theme.USER.themesInterface.getHOVER_TEXT());
         createImage = UiUtils.resize(createImage, 15, 15);
         create.setIcon(new ImageIcon(createImage));
 
         // Open image computing
         BufferedImage openImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/open.png"));
-        UiUtils.changeColor(openImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+        UiUtils.changeColor(openImage, Color.BLACK, Theme.USER.themesInterface.getHOVER_TEXT());
         openImage = UiUtils.resize(openImage, 15, 15);
         open.setIcon(new ImageIcon(openImage));
 
         // Settings image computing
         BufferedImage settingsImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/settings.png"));
-        UiUtils.changeColor(settingsImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+        UiUtils.changeColor(settingsImage, Color.BLACK, Theme.USER.themesInterface.getHOVER_TEXT());
         settingsImage = UiUtils.resize(settingsImage, 15, 15);
         settings.setIcon(new ImageIcon(settingsImage));
 

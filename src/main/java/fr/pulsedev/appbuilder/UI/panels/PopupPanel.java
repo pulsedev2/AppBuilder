@@ -7,6 +7,7 @@ import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 
 import javax.swing.*;
@@ -34,17 +35,17 @@ public class PopupPanel extends JPanel {
         this.setLayout(null);
 
         JLabel title = new JLabel("Project Information");
-        title.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+        title.setForeground(Theme.USER.themesInterface.getTEXT());
         title.setFont(new Font("Dialog", Font.BOLD, 35));
         JButton close = UiUtils.getCloseButton();
 
         for(String key : projectOptions.params.keySet()){
             i++;
             JLabel label = new JLabel("Enter " + key);
-            label.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+            label.setForeground(Theme.USER.themesInterface.getTEXT());
             JTextField field = new JTextField(projectOptions.get(key), 33);
             field.setBorder(null);
-            field.setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getLIGHTER_FOREGROUND());
+            field.setBackground(Theme.USER.themesInterface.getLIGHTER_FOREGROUND());
             components.put(key, field);
             this.add(label);
             this.add(field);
@@ -54,9 +55,9 @@ public class PopupPanel extends JPanel {
 
         JButton submit = new JButton("Submit");
         submit.setFont(new Font("Dialog", Font.PLAIN, 15));
-        submit.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+        submit.setForeground(Theme.USER.themesInterface.getTEXT());
         submit.setBorder(null);
-        submit.setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND());
+        submit.setBackground(Theme.USER.themesInterface.getBACKGROUND());
 
         ActionListener actionListener = e -> {
             if(e.getSource() == submit){
@@ -79,13 +80,13 @@ public class PopupPanel extends JPanel {
         MouseAdapter onSubmitHover = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                submit.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getHOVER_TEXT());
+                submit.setForeground(Theme.USER.themesInterface.getHOVER_TEXT());
                 submit.setFont(new Font("Dialog", Font.BOLD, 15));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                submit.setForeground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+                submit.setForeground(Theme.USER.themesInterface.getTEXT());
                 submit.setFont(new Font("Dialog", Font.PLAIN, 15));
             }
         };

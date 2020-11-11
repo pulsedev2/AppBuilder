@@ -31,6 +31,12 @@ public class Settings {
         }
     }
 
+    /**
+     * @deprecated Please don't use to get theme apart at the start.
+     * @return Settings stored in the file
+     * @see Theme#USER
+     */
+    @Deprecated
     public static Settings getSettingsFromJSon(){
         File file = new File(Main.RESOURCES_PATH + "settings/settings.json");
         try(FileReader reader = new FileReader(file)){

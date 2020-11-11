@@ -1,6 +1,7 @@
 package fr.pulsedev.appbuilder.UI.panels.editor;
 
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 import fr.pulsedev.appbuilder.visualeditor.blocks.TextArea;
 
@@ -15,7 +16,7 @@ import java.util.TimerTask;
 
 public class EditorPanel extends JPanel {
 
-    BufferedImage bg = UiUtils.generateBackgroundImage(Settings.getSettingsFromJSon().getTheme().getThemes());
+    BufferedImage bg = UiUtils.generateBackgroundImage(Theme.USER);
 
     public EditorPanel(){
 
@@ -57,9 +58,6 @@ public class EditorPanel extends JPanel {
         int y1 = (int) b.getY();
         CubicCurve2D cubCurve = new CubicCurve2D.Float(x1, y1, y1 + 200, y1 - 115, 400 - 200, 400 + 115, 400, 400);
         g2d.draw(cubCurve);
-
-        g2d.setColor(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getFOREGROUND());
-        //g2d.fillRect(0,0, 100, (int) this.getSize().getHeight());
     }
 
 

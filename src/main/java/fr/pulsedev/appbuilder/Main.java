@@ -3,15 +3,15 @@ package fr.pulsedev.appbuilder;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.settings.Theme;
+import fr.pulsedev.appbuilder.themes.Themes;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
-import java.net.URISyntaxException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Properties;
 
 public class Main {
@@ -23,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Main.args = args;
+        new Theme(args);
         Settings.init();
 
         Properties properties = new Properties();
