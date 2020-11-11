@@ -10,7 +10,7 @@ public class Window extends JFrame{
     private final Dimension size;
     private final String name;
     private final int constants;
-    private final JPanel panel;
+    private JPanel panel;
     private final boolean resizable;
     private final Color color;
     private final boolean undecorated;
@@ -37,7 +37,7 @@ public class Window extends JFrame{
             this.setName(name);
             this.setDefaultCloseOperation(constants);
             this.setResizable(resizable);
-            this.setLocation(100, 100);
+            this.setLocationRelativeTo(null);
 
             try{
                 this.setUndecorated(undecorated);
@@ -64,6 +64,10 @@ public class Window extends JFrame{
             this.dispose();
             isRunning = false;
         }
+    }
+
+    public void setPanel(JPanel panel){
+        this.panel = panel;
     }
 
     public boolean isDecorated(){

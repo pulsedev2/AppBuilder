@@ -15,7 +15,6 @@ public enum  PanelManager {
 
     EDITOR(new Window.Builder()
             .setName("Editor")
-            .setPanel(new EditorPanel())
             .setResizable(true)
             .setBackground(Theme.USER.themesInterface.getBACKGROUND())
             .setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()))
