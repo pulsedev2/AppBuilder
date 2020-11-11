@@ -2,6 +2,7 @@ package fr.pulsedev.appbuilder.UI.panels;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
+import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.themes.Themes;
 import fr.pulsedev.appbuilder.utils.UiUtils;
@@ -19,7 +20,7 @@ public class RestartIdePanel extends JPanel {
         Themes themes = Theme.USER;
 
         // Restart Button
-        JButton restart = new JButton("Restart Now");
+        JButton restart = new JButton(Language.USER.interface_.getString("restart_now"));
         restart.setFont(new Font("Dialog", Font.PLAIN, 20));
         UiUtils.makeJButtonTransparent(restart);
         restart.setForeground(themes.themesInterface.getTEXT());
@@ -27,7 +28,7 @@ public class RestartIdePanel extends JPanel {
         restart.setContentAreaFilled(true);
 
         // Cancel Button
-        JButton cancel = new JButton("Cancel");
+        JButton cancel = new JButton(Language.USER.interface_.getString("cancel"));
         cancel.setFont(new Font("Dialog", Font.PLAIN, 20));
         UiUtils.makeJButtonTransparent(cancel);
         cancel.setForeground(themes.themesInterface.getTEXT());
@@ -35,7 +36,7 @@ public class RestartIdePanel extends JPanel {
         cancel.setContentAreaFilled(true);
 
         // Text
-        JLabel label = new JLabel("Do you want to restart AppBuilder now ?");
+        JLabel label = new JLabel("<html>" + Language.USER.interface_.getString("restart_text") + "</html>");
         label.setFont(new Font("Dialog", Font.PLAIN, 20));
         label.setForeground(themes.themesInterface.getTEXT());
 

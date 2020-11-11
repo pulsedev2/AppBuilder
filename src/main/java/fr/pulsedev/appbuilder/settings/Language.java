@@ -1,18 +1,25 @@
 package fr.pulsedev.appbuilder.settings;
 
+import fr.pulsedev.appbuilder.Languages.Lang;
+
 public class Language extends Settings{
 
-    private String lang;
+    private Lang lang;
+    public static Lang USER;
 
-    public Language(String lang){
+    public Language(Lang lang){
         this.lang = lang;
     }
 
-    public String getLang() {
+    public Language(String[] args){
+        USER = Settings.getSettingsFromJSon().getLanguage().getLang();
+    }
+
+    public Lang getLang() {
         return lang;
     }
 
-    public void setLanguage(String language){
+    public void setLang(Lang language){
         this.lang = language;
     }
 

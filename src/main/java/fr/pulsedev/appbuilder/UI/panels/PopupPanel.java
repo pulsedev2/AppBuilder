@@ -7,7 +7,7 @@ import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
-import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 
@@ -17,7 +17,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.TimerTask;
 
 public class PopupPanel extends JPanel {
 
@@ -26,35 +29,34 @@ public class PopupPanel extends JPanel {
     Window window = (Window) SwingUtilities.getWindowAncestor(this);
 
     public PopupPanel(File file){
-
-        int x_default_label = 215;
-        int x_default_field = 100;
         int y_default_label = 0;
         int y_default_field = 95;
         int i = 0;
 
         this.setLayout(null);
 
-        JLabel title = new JLabel("Project Information");
+        JLabel title = new JLabel(Language.USER.interface_.getString("project_information"));
         title.setForeground(Theme.USER.themesInterface.getTEXT());
         title.setFont(new Font("Dialog", Font.BOLD, 35));
         JButton close = UiUtils.getCloseButton();
-
+        List<JLabel> labelList = new ArrayList<>();
+        List<JTextField> fieldList = new ArrayList<>();
         for(String key : projectOptions.params.keySet()){
             i++;
-            JLabel label = new JLabel("Enter " + key);
+            JLabel label = new JLabel(Language.USER.interface_.getString("enter") +" " + Language.USER.interface_.getString("projectOptions." + key));
             label.setForeground(Theme.USER.themesInterface.getTEXT());
+            label.setFont(new Font("DIALOG", Font.PLAIN, 15));
             JTextField field = new JTextField(projectOptions.get(key), 33);
             field.setBorder(null);
             field.setBackground(Theme.USER.themesInterface.getLIGHTER_FOREGROUND());
             components.put(key, field);
             this.add(label);
             this.add(field);
-            label.setBounds(x_default_label - (2*key.length()) , y_default_label + (65*i), 130, 150);
-            field.setBounds(x_default_field, y_default_field + (65*i), 300, 30);
+            labelList.add(label);
+            fieldList.add(field);
         }
 
-        JButton submit = new JButton("Submit");
+        JButton submit = new JButton(Language.USER.interface_.getString("submit"));
         submit.setFont(new Font("Dialog", Font.PLAIN, 15));
         submit.setForeground(Theme.USER.themesInterface.getTEXT());
         submit.setBorder(null);
@@ -97,9 +99,28 @@ public class PopupPanel extends JPanel {
         this.add(submit);
         this.add(title);
         this.add(close);
-        title.setBounds(95, 50, 350, 50);
-        submit.setBounds(x_default_label - 45, y_default_label + (120*i), 150, 30);
-        close.setBounds(500 - 30,0,30,30);
+
+        PopupPanel instance = this;
+        int lastI = i;
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                title.setBounds(250 - instance.getGraphics().getFontMetrics(new Font("DIALOG", Font.BOLD, 35)).stringWidth(title.getText())/2, 50, instance.getGraphics().getFontMetrics(new Font("DIALOG", Font.BOLD, 35)).stringWidth(title.getText()), 50);
+                submit.setBounds(250 - instance.getGraphics().getFontMetrics(new Font("DIALOG", Font.PLAIN, 15)).stringWidth(submit.getText())/2, y_default_label + (120*lastI), instance.getGraphics().getFontMetrics(new Font("DIALOG", Font.BOLD, 15)).stringWidth(submit.getText()), 30);
+                close.setBounds(500 - 30,0,30,30);
+
+                for(JLabel label: labelList){
+                    label.setBounds(250 - instance.getGraphics().getFontMetrics(new Font("DIALOG", Font.PLAIN, 15)).stringWidth(label.getText())/2, y_default_label + (65*(labelList.indexOf(label)+1)), instance.getGraphics().getFontMetrics(new Font("DIALOG", Font.PLAIN, 15)).stringWidth(label.getText()), 150);
+                }
+                for(JTextField field: fieldList){
+                    field.setBounds(250-150, y_default_field + (65*(fieldList.indexOf(field)+1)), 300, 30);
+                }
+            }
+        };
+
+        java.util.Timer timer = new java.util.Timer();
+        timer.schedule(timerTask, 100);
     }
 
 }

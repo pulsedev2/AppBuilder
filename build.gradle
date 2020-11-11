@@ -27,5 +27,6 @@ jar.dependsOn(addVersion)
 dependencies {
     implementation 'org.jetbrains:annotations:19.0.0'
     implementation 'com.google.code.gson:gson:2.7'
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.8'
 }
 

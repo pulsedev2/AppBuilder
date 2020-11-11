@@ -69,6 +69,12 @@ public class UiUtils {
         return bufferedImage;
     }
 
+    public static String lowCaseApartTheFirstChar(String string){
+        String result = string.toLowerCase();
+
+        return result.substring(0,1).toUpperCase() + result.substring(1);
+    }
+
     public static JButton getCloseButton(){
         JButton close = new JButton();
 

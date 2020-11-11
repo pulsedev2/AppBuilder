@@ -2,6 +2,7 @@ package fr.pulsedev.appbuilder.settings;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import fr.pulsedev.appbuilder.Languages.Lang;
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.themes.Themes;
 
@@ -29,6 +30,7 @@ public class Settings {
                 e.printStackTrace();
             }
         }
+        getSettingsFromJSon();
     }
 
     /**
@@ -47,7 +49,7 @@ public class Settings {
         }
         Settings temp = new Settings();
         temp.setTheme(new Theme(Themes.DEFAULT));
-        temp.setLanguage(new Language("fr_FR"));
+        temp.setLanguage(new Language(Lang.FRENCH));
         temp.saveSettingsToJson();
         return temp;
     }

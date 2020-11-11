@@ -1,7 +1,9 @@
 package fr.pulsedev.appbuilder;
 
+import fr.pulsedev.appbuilder.Languages.Lang;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
+import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.themes.Themes;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.Properties;
 
 public class Main {
@@ -21,10 +24,11 @@ public class Main {
     public static final String RESOURCES_PATH = Paths.get("").toAbsolutePath() + "/src/main/resources/";
     public static String[] args;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Main.args = args;
-        new Theme(args);
         Settings.init();
+        new Theme(args);
+        new Language(args);
 
         Properties properties = new Properties();
         InputStream buildProperties = new FileInputStream("./build.properties");

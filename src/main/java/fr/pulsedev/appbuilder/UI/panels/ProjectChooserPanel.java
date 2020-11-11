@@ -6,6 +6,7 @@ import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
+import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.FolderFilter;
@@ -23,9 +24,9 @@ import java.io.File;
 public class ProjectChooserPanel extends JPanel {
 
     public ProjectChooserPanel(){
-        JButton open = new JButton("Open a project ...");
+        JButton open = new JButton(Language.USER.interface_.getString("open_project"));
         open.setFont(new Font("Dialog", Font.PLAIN, 15));
-        JButton create = new JButton("New project ...");
+        JButton create = new JButton(Language.USER.interface_.getString("new_project"));
         create.setFont(new Font("Dialog", Font.PLAIN, 15));
         // Get user desktop location
         File desktop = new File(System.getProperty("user.home"), "Desktop");
@@ -35,7 +36,7 @@ public class ProjectChooserPanel extends JPanel {
         ImageIcon logoIcon = new ImageIcon(Main.RESOURCES_PATH + "images/logo.png");
         JLabel logo = new JLabel(logoIcon);
         JButton close = UiUtils.getCloseButton();
-        JButton settings = new JButton("Configure ...");
+        JButton settings = new JButton(Language.USER.interface_.getString("options"));
         settings.setFont(new Font("Dialog", Font.PLAIN, 15));
 
         // Listener of open & create button
@@ -67,11 +68,12 @@ public class ProjectChooserPanel extends JPanel {
                 if (returnedVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     PanelManager.PROJECT.window.setVisible(false);
-                    Window popupWindow = new Window.Builder().setName("Test").setPanel(new PopupPanel(file)).setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND()).setResizable(false).createWindow();
+                    Window popupWindow = new Window.Builder().setName("New Project").setPanel(new PopupPanel(file)).setBackground(Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getBACKGROUND()).setResizable(false).createWindow();
                     popupWindow.run();
                 }
             }
             else if (e.getSource() == settings){
+                PanelManager.SETTINGS.window.setPanel(new SettingsPanel());
                 PanelManager.SETTINGS.window.run();
             }
 
@@ -140,9 +142,9 @@ public class ProjectChooserPanel extends JPanel {
 
         // Set bounds
         close.setBounds(500 - 30,0,30,30);
-        open.setBounds(165, 250, 175, 20);
-        create.setBounds(170, 300, 150, 25);
-        logo.setBounds(170,110,150,135);
-        settings.setBounds(500 - 150, 500 - 25, 150, 25);
+        open.setBounds((int) (250 - open.getText().length()*7.5f), 250, open.getText().length()*15, 20);
+        create.setBounds((int) (250 - create.getText().length()*7.5f), 300, create.getText().length()*15, 25);
+        logo.setBounds(250 - logoIcon.getIconWidth()/2,110,150,135);
+        settings.setBounds(500 - settings.getText().length()*15, 500 - 25, settings.getText().length()*15, 25);
     }
 }
