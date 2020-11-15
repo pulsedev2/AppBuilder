@@ -60,7 +60,7 @@ public class RestartIdePanel extends JPanel {
             if(e.getSource() == restart){
                 try {
                     Main.restartApplication();
-                } catch (IOException | InterruptedException exception) {
+                } catch (IOException exception) {
                     exception.printStackTrace();
                 }
             }

@@ -17,13 +17,13 @@ import java.util.Timer;
 
 public class SettingsPanel extends JPanel {
 
-
+    @SuppressWarnings("deprecation")
     public SettingsPanel(){
         List<String> themeList = new ArrayList<>();
         for (Themes theme: Themes.values()) {
             themeList.add(UiUtils.lowCaseApartTheFirstChar(theme.name()));
         }
-        JComboBox<String> theme = new JComboBox<String>(themeList.toArray(String[]::new));
+        JComboBox<String> theme = new JComboBox<>(themeList.toArray(String[]::new));
         theme.setSelectedItem(UiUtils.lowCaseApartTheFirstChar(Settings.getSettingsFromJSon().getTheme().getThemes().name()));
 
         List<String> langList = new ArrayList<>();

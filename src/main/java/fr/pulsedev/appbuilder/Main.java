@@ -8,6 +8,7 @@ import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.themes.Themes;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,8 +25,9 @@ public class Main {
     public static final String RESOURCES_PATH = Paths.get("").toAbsolutePath() + "/src/main/resources/";
     public static String[] args;
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         Main.args = args;
+        UIManager.put("BlockUI", "fr.pulsedev.appbuilder.blueprints.UI.BlockUI");
         Settings.init();
         new Theme(args);
         new Language(args);
@@ -38,11 +40,11 @@ public class Main {
         PanelManager.PROJECT.window.run();
     }
 
-    public static void restartApplication() throws IOException, InterruptedException {
+    public static void restartApplication() throws IOException {
         StringBuilder cmd = new StringBuilder();
-        cmd.append(System.getProperty("java.home") + File.separator + "bin" + File.separator + "java ");
+        cmd.append(System.getProperty("java.home")).append(File.separator).append("bin").append(File.separator).append("java ");
         for (String jvmArg : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
-            cmd.append(jvmArg + " ");
+            cmd.append(jvmArg).append(" ");
         }
         cmd.append("-cp ").append(ManagementFactory.getRuntimeMXBean().getClassPath()).append(" ");
         cmd.append(Main.class.getName()).append(" ");

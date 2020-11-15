@@ -11,6 +11,7 @@ public class Theme extends Settings{
         this.themes = themes;
     }
 
+    @SuppressWarnings("deprecation")
     public Theme(String[] args){
         USER = Settings.getSettingsFromJSon().getTheme().getThemes();
     }

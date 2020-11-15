@@ -2,10 +2,13 @@ package fr.pulsedev.appbuilder.utils;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.settings.Settings;
+import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.themes.Themes;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -76,37 +79,49 @@ public class UiUtils {
     }
 
     public static JButton getCloseButton(){
+        return getCloseButton(null);
+    }
+
+    public static JButton getCloseButton(@Nullable Container parent){
         JButton close = new JButton();
 
         close.addActionListener(e -> {
             if(e.getSource() == close){
-                System.exit(0);
+                if(parent == null){
+                    System.exit(0);
+                }else{
+                    parent.setVisible(false);
+                }
             }
         });
 
-        close.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                close.setContentAreaFilled(true);
-                close.setBackground(Color.RED);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                UiUtils.makeJButtonTransparent(close);
-            }
-        });
+        close.addMouseListener(getAdapter(close));
 
 
         UiUtils.makeJButtonTransparent(close);
 
         // Close image computing
         BufferedImage closeImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/close.png"));
-        UiUtils.changeColor(closeImage, Color.BLACK, Settings.getSettingsFromJSon().getTheme().getThemes().themesInterface.getTEXT());
+        UiUtils.changeColor(closeImage, Color.BLACK, Theme.USER.themesInterface.getTEXT());
         closeImage = UiUtils.resize(closeImage, 15, 15);
         close.setIcon(new ImageIcon(closeImage));
 
         return close;
+    }
+
+    private static MouseAdapter getAdapter(JButton component){
+        return new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                component.setContentAreaFilled(true);
+                component.setBackground(Color.RED);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                UiUtils.makeJButtonTransparent(component);
+            }
+        };
     }
 
     public static class FrameDragListener extends MouseAdapter {

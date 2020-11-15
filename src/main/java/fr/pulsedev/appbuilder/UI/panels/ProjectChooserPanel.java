@@ -23,6 +23,7 @@ import java.io.File;
 
 public class ProjectChooserPanel extends JPanel {
 
+    @SuppressWarnings("deprecation")
     public ProjectChooserPanel(){
         JButton open = new JButton(Language.USER.interface_.getString("open_project"));
         open.setFont(new Font("Dialog", Font.PLAIN, 15));

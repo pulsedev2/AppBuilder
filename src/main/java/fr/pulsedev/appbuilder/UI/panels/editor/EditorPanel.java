@@ -1,7 +1,6 @@
 package fr.pulsedev.appbuilder.UI.panels.editor;
 
 import fr.pulsedev.appbuilder.UI.panels.editor.slider.LeftSlider;
-import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 
@@ -39,16 +38,15 @@ public class EditorPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
         g2d.drawImage(new ImageIcon(this.bg.getSubimage(0,0, (int) this.getSize().getWidth(), (int) this.getSize().getHeight())).getImage(), 0, 0, null);
 
-        PointerInfo a = MouseInfo.getPointerInfo();
+        /*PointerInfo a = MouseInfo.getPointerInfo();
         Point b = new Point(a.getLocation());
         SwingUtilities.convertPointFromScreen(b, SwingUtilities.getWindowAncestor(this));
         int x1 = (int) b.getX();
         int y1 = (int) b.getY();
         CubicCurve2D cubCurve = new CubicCurve2D.Float(x1, y1, y1 + 200, y1 - 115, 400 - 200, 400 + 115, 400, 400);
-        g2d.draw(cubCurve);
+        g2d.draw(cubCurve);*/
 
         leftSlider.repaint(this);
         this.add(leftSlider);

@@ -11,6 +11,7 @@ public class Language extends Settings{
         this.lang = lang;
     }
 
+    @SuppressWarnings("deprecation")
     public Language(String[] args){
         USER = Settings.getSettingsFromJSon().getLanguage().getLang();
     }
