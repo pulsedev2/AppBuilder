@@ -1,6 +1,4 @@
-# AppBuilder
-
-![Last build](https://github.com/pulsedev2/AppBuilder/workflows/Java%20CI%20with%20Gradle/badge.svg)
+# AppBuilder [![Production Builds](https://github.com/pulsedev2/AppBuilder/actions/workflows/production.yml/badge.svg?branch=main)](https://github.com/pulsedev2/AppBuilder/actions/workflows/production.yml)[![Staging Builds](https://github.com/pulsedev2/AppBuilder/actions/workflows/staging.yml/badge.svg?branch=main)](https://github.com/pulsedev2/AppBuilder/actions/workflows/staging.yml)
 
 AppBuilder is an open-source IDE to create your own app with ease.
 
