@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.pulsedev</groupId>
+    <artifactId>AppBuilder</artifactId>
+    <version>1.2-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>RenardFute</name>
+            <url>http://renardfute.fr</url>
+            <email>tmcontacte@gmail.com</email>
+            <organization>PulseDev</organization>
+            <organizationUrl>https://pulsedev.fr</organizationUrl>
+            <roles>
+                <role>owner</role>
+            </roles>
+            <timezone>UTC+1</timezone>
+        </developer>
+        <developer>
+            <name>Niout</name>
+            <organization>PulseDev</organization>
+            <organizationUrl>https://pulsedev.fr</organizationUrl>
+            <roles>
+                <role>owner</role>
+            </roles>
+            <timezone>UTC+1</timezone>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>19.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.8</version>
+        </dependency>
+    </dependencies>
+
+</project>
