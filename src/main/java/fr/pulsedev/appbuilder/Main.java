@@ -1,12 +1,10 @@
 package fr.pulsedev.appbuilder;
 
-import fr.pulsedev.appbuilder.Languages.Lang;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
-import fr.pulsedev.appbuilder.themes.Themes;
 
 import javax.swing.*;
 import java.io.File;
@@ -15,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Paths;
-import java.sql.Time;
 import java.util.Properties;
 
 public class Main {
