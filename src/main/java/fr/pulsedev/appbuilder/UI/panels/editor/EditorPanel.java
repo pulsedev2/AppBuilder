@@ -6,16 +6,13 @@ import fr.pulsedev.appbuilder.utils.UiUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.CubicCurve2D;
 import java.awt.image.BufferedImage;
 import java.util.TimerTask;
 
 public class EditorPanel extends JPanel {
 
     BufferedImage bg = UiUtils.generateBackgroundImage(Theme.USER);
-    LeftSlider leftSlider = new LeftSlider();
+    LeftSlider leftSlider;
 
     public EditorPanel(){
 
@@ -28,9 +25,9 @@ public class EditorPanel extends JPanel {
                component.repaint();
             }
         }, 0, 1);
+        this.setLayout(null);
 
-
-        LeftSlider leftSlider = new LeftSlider();
+        leftSlider = new LeftSlider();
         this.add(leftSlider);
 
     }
