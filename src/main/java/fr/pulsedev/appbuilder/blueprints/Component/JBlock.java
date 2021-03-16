@@ -13,9 +13,7 @@ public class JBlock extends JComponent {
     public JBlock(Color color, Block block, Dimension size){
         setUI(new BlockUI());
         setBackground(color);
-        setSize(size);
-        setAlignmentX(block.getCoord().getX());
-        setAlignmentY(block.getCoord().getY());
+        setBounds(block.getCoord().getX(), block.getCoord().getY(), size.width, size.height);
     }
 
     public JBlock(Color color, Block block){
