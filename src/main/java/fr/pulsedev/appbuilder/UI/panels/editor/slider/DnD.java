@@ -17,11 +17,19 @@ public class DnD {
     private final ArrayList<Component> toNotDrag;
     private final Container parent;
     private Component toDrag;
+    private boolean shouldClone = true;
 
     public DnD(JComponent component, ArrayList<Component> toNotDrag, Container parent){
         this.component = component;
         this.toNotDrag =toNotDrag;
         this.parent = parent;
+    }
+
+    public DnD(JComponent component, ArrayList<Component> toNotDrag, Container parent, boolean shouldClone){
+        this.component = component;
+        this.toNotDrag =toNotDrag;
+        this.parent = parent;
+        this.shouldClone = shouldClone;
     }
 
     public DnD(JComponent component){
@@ -42,20 +50,26 @@ public class DnD {
             @Override
             public void mousePressed(MouseEvent e) {
                 Component componentToDrag = Components.getClickedComponent(component, new Coordinates(e.getX(), e.getY()));
-                System.out.println(componentToDrag);
                 if(componentToDrag == null || toNotDrag.contains(componentToDrag))return;
-                toDrag = Components.cloneComponent(componentToDrag);
+                if(shouldClone){
+                    toDrag = Components.cloneComponent(componentToDrag);
+                }
+                else{
+                    toDrag = componentToDrag;
+                }
                 component.add(toDrag);
             }
 
             @Override
             public void mouseReleased(MouseEvent e){
                 if(toDrag==null) return;
-                component.remove(toDrag);
+                if(shouldClone)
+                    component.remove(toDrag);
                 Container parentLocal = PanelManager.EDITOR.window.getContentPane();
                 Component[] components = parentLocal.getComponents();
                 if(toDrag.getX() <= component.getWidth() && Arrays.asList(components).contains(toDrag)) {
-                    parentLocal.remove(toDrag);
+                    if(shouldClone)
+                        parentLocal.remove(toDrag);
                 }
 
                 toDrag = null;

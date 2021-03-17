@@ -1,12 +1,16 @@
 package fr.pulsedev.appbuilder.UI.panels.editor;
 
+import fr.pulsedev.appbuilder.UI.panels.editor.slider.DnD;
 import fr.pulsedev.appbuilder.UI.panels.editor.slider.LeftSlider;
+import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 public class EditorPanel extends JPanel {
@@ -29,6 +33,11 @@ public class EditorPanel extends JPanel {
 
         leftSlider = new LeftSlider();
         this.add(leftSlider);
+
+        JLabel title = new JLabel("Elements");
+        MouseAdapter mouseAdapter = new DnD(this, new ArrayList<>(){{add(title);}}, this, false).getDnD();
+        this.addMouseMotionListener(mouseAdapter);
+        this.addMouseListener(mouseAdapter);
 
     }
     @Override
