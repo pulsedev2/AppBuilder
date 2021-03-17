@@ -103,7 +103,6 @@ public class Project {
                 this.options.set(element.getNodeName(), element.getAttribute("value"));
             }
         }
-        System.out.println(this.options.params.toString());
     }
 
     @SuppressWarnings("unused")
