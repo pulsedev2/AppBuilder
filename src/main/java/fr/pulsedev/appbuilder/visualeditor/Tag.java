@@ -1,9 +1,11 @@
 package fr.pulsedev.appbuilder.visualeditor;
 
-public class Tag<A> {
+import java.io.Serializable;
+
+public class Tag<A> implements Serializable {
     private final String NAME;
     private A value;
-    private Class<A> type;
+    private final Class<A> type;
 
     public Tag(String NAME, A defaultValue, Class<A> type) {
         this.NAME = NAME;
@@ -20,7 +22,7 @@ public class Tag<A> {
     }
 
     public void setValue(Object value) {
-        if(value.getClass().isInstance(type)){
+        if(value.getClass().equals(type)){
             this.value = (A) value;
         }
     }

@@ -1,9 +1,10 @@
 package fr.pulsedev.appbuilder.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Coordinates {
+public class Coordinates implements Serializable {
 
     private int x,y;
 
@@ -13,7 +14,8 @@ public class Coordinates {
     }
 
     public Coordinates(){
-
+        this.x=0;
+        this.y=0;
     }
 
     public void setX(int x){

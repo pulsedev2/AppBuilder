@@ -1,10 +1,12 @@
-package fr.pulsedev.appbuilder.blueprints.UI;
+package fr.pulsedev.appbuilder.visualeditor.blocks.UI;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import java.awt.*;
 
 public class BlockUI extends ComponentUI {
+
+    public static final String NAME = "BlockUI";
 
     public static ComponentUI createUI(JComponent c){
         return new BlockUI();
