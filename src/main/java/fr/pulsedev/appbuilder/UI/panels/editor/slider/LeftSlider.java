@@ -1,11 +1,11 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
-import fr.pulsedev.appbuilder.blueprints.Block;
-import fr.pulsedev.appbuilder.blueprints.Component.JBlock;
+import fr.pulsedev.appbuilder.visualeditor.blocks.JBlock;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.Coordinates;
 import fr.pulsedev.appbuilder.utils.UiUtils;
+import fr.pulsedev.appbuilder.visualeditor.blocks.JTextArea;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -17,8 +17,9 @@ public class LeftSlider extends JDesktopPane {
 
     private final JInternalFrame internalFrame = new JInternalFrame("Test frame", false, true, false,false);
     private final JPanel panel = new JPanel();
-    private Component toDrag;
     private Component component;
+    JBlock block = new JBlock();
+    JTextArea text = new JTextArea();
 
     public LeftSlider(){
         this.setName("Test");
@@ -27,16 +28,18 @@ public class LeftSlider extends JDesktopPane {
         JLabel title = new JLabel("Elements");
         title.setFont(new Font("Dialog", Font.BOLD, 20));
         title.setForeground(Theme.USER.themesInterface.getTEXT());
-        JLabel test = new JLabel("test");
         JButton close = UiUtils.getCloseButton(this);
-        JBlock block = new JBlock(new Color(150,15,15), new Block(new Coordinates(100,100)));
+        // Update block
+        block.setCoord(new Coordinates(100, 100));
+        block.editTag("color", new Color(150,15,15));
+        // Update text area
+        text.setCoord(new Coordinates(100, 400));
+        text.editTag("text", "Text Area");
+        //
         panel.setLayout(null);
         panel.setBackground(Theme.USER.themesInterface.getLIGHTER_BACKGROUND());
 
         ((BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
-
-        test.setForeground(Theme.USER.themesInterface.getTEXT());
-
 
         MouseAdapter mouseAdapter = new DnD(panel, new ArrayList<>(){{add(title);}}, PanelManager.EDITOR.window.getContentPane()).getDnD();
         panel.addMouseMotionListener(mouseAdapter);
@@ -48,16 +51,14 @@ public class LeftSlider extends JDesktopPane {
         internalFrame.setVisible(true);
 
         // Panel assets
-        panel.add(test);
+        panel.add(text);
         panel.add(title);
         panel.add(block);
         panel.add(close);
-        test.setBounds(300, 300,100,50);
         title.setBounds(150, 0,150, 70);
         block.setBounds(50,150,250,187);
         close.setBounds(0,0,30,30);
-
-        System.out.println(block.getX());
+        text.setBounds(50, 400, 250, 187);
     }
 
     public JInternalFrame getInternalFrame() {
@@ -71,6 +72,8 @@ public class LeftSlider extends JDesktopPane {
             this.setVisible(false);
             return;
         }
+        block.update();
+        text.update();
 
         internalFrame.setBounds(0,0,(SwingUtilities.getWindowAncestor(component).getWidth()/5),SwingUtilities.getWindowAncestor(component).getHeight());
 

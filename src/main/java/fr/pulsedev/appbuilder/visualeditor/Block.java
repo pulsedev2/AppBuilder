@@ -1,19 +1,43 @@
 package fr.pulsedev.appbuilder.visualeditor;
 
-import java.util.Collection;
+import fr.pulsedev.appbuilder.utils.Coordinates;
+
+import javax.swing.*;
+import javax.swing.plaf.ComponentUI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class Block {
+public abstract class Block<A extends ComponentUI> extends JComponent {
     List<Tag<?>> tags;
+    protected final String uiClassID;
 
-    public Block(List<Tag<?>> tags) {
+
+    public Block(List<Tag<?>> tags, String uiClassID) {
         this.tags = tags;
+        this.uiClassID = uiClassID;
+    }
+
+    public String getUIClassID(){
+        return uiClassID;
+    }
+
+    public void updateUI() {
+        setUI(UIManager.getUI(this));
+    }
+
+    public void setUI(ComponentUI ui){
+        super.setUI(ui);
+    }
+
+    public A getUI(){
+        return (A) ui;
     }
 
     public List<Tag<?>> getTags() {
         return tags;
     }
+
+    private Coordinates coord = new Coordinates();
 
     public void editTag(String tagName, Object value){
         for (Tag<?> tag : this.tags) {
@@ -23,13 +47,13 @@ public abstract class Block {
         }
     }
 
-    public Collection<Tag<?>> getTagsByName(String name){
+    public List<Tag<?>> getTagsByName(String name){
         return this.tags.stream()
                 .filter(tag -> tag.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
-    public Collection<Tag<?>> getTagsByValue(Object value){
+    public List<Tag<?>> getTagsByValue(Object value){
         return this.tags.stream()
                 .filter(tag -> {
                     if(value.getClass().isInstance(tag.getType())){
@@ -38,4 +62,22 @@ public abstract class Block {
                     return false;
                 }).collect(Collectors.toList());
     }
+
+    public Coordinates getCoord() {
+        return coord;
+    }
+
+    public void setCoord(Coordinates coord) {
+        this.coord = coord;
+    }
+
+    public void setX(int x){
+        this.coord.setX(x);
+    }
+
+    public void setY(int y){
+        this.coord.setY(y);
+    }
+
+    public void update(){};
 }

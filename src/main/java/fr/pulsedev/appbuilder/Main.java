@@ -5,6 +5,7 @@ import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
+import fr.pulsedev.appbuilder.visualeditor.blocks.UI.UITypes;
 
 import javax.swing.*;
 import java.io.File;
@@ -24,7 +25,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Main.args = args;
-        UIManager.put("BlockUI", "fr.pulsedev.appbuilder.blueprints.UI.BlockUI");
+        for (UITypes type : UITypes.values()) {
+            UIManager.put(type.name, type.path);
+        }
         Settings.init();
         new Theme(args);
         new Language(args);
