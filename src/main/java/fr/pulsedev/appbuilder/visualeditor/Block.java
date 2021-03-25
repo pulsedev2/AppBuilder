@@ -1,7 +1,5 @@
 package fr.pulsedev.appbuilder.visualeditor;
 
-import fr.pulsedev.appbuilder.utils.Coordinates;
-
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import java.util.List;
@@ -12,9 +10,12 @@ public abstract class Block<A extends ComponentUI> extends JComponent {
     protected final String uiClassID;
 
 
-    public Block(List<Tag<?>> tags, String uiClassID) {
-        this.tags = tags;
+    public Block(String uiClassID) {
         this.uiClassID = uiClassID;
+    }
+
+    public void setTags(List<Tag<?>> tags) {
+        this.tags = tags;
     }
 
     public String getUIClassID(){
@@ -36,8 +37,6 @@ public abstract class Block<A extends ComponentUI> extends JComponent {
     public List<Tag<?>> getTags() {
         return tags;
     }
-
-    private Coordinates coord = new Coordinates();
 
     public void editTag(String tagName, Object value){
         for (Tag<?> tag : this.tags) {
@@ -63,21 +62,5 @@ public abstract class Block<A extends ComponentUI> extends JComponent {
                 }).collect(Collectors.toList());
     }
 
-    public Coordinates getCoord() {
-        return coord;
-    }
-
-    public void setCoord(Coordinates coord) {
-        this.coord = coord;
-    }
-
-    public void setX(int x){
-        this.coord.setX(x);
-    }
-
-    public void setY(int y){
-        this.coord.setY(y);
-    }
-
-    public void update(){};
+    public void update(){}
 }

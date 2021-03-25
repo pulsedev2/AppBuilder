@@ -102,7 +102,6 @@ public class FileUtils {
             document.getDocumentElement().normalize();
             return document;
         }catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
             return null;
         }
     }

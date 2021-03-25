@@ -30,10 +30,10 @@ public class LeftSlider extends JDesktopPane {
         title.setForeground(Theme.USER.themesInterface.getTEXT());
         JButton close = UiUtils.getCloseButton(this);
         // Update block
-        block.setCoord(new Coordinates(100, 100));
+        block.editTag("coordinates", new Coordinates(100, 100));
         block.editTag("color", new Color(150,15,15));
         // Update text area
-        text.setCoord(new Coordinates(100, 400));
+        text.editTag("coordinates", new Coordinates(100, 400));
         text.editTag("text", "Text Area");
         //
         panel.setLayout(null);
@@ -50,6 +50,9 @@ public class LeftSlider extends JDesktopPane {
         internalFrame.add(panel);
         internalFrame.setVisible(true);
 
+        this.setFocusable(false);
+        internalFrame.setFocusable(false);
+        panel.setFocusable(false);
         // Panel assets
         panel.add(text);
         panel.add(title);

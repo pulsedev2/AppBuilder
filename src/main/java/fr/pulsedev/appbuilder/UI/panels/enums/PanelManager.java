@@ -3,9 +3,7 @@ package fr.pulsedev.appbuilder.UI.panels.enums;
 import fr.pulsedev.appbuilder.UI.Window;
 import fr.pulsedev.appbuilder.UI.panels.RestartIdePanel;
 import fr.pulsedev.appbuilder.UI.panels.SettingsPanel;
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
-import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
 
 import javax.swing.*;
@@ -19,6 +17,7 @@ public enum  PanelManager {
             .setBackground(Theme.USER.themesInterface.getBACKGROUND())
             .setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()))
             .setUndecorated(false)
+            .addShortcuts()
             .createWindow()),
     PROJECT(new Window.Builder()
             .setName("Projects")
