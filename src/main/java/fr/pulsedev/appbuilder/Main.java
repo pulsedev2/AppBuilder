@@ -1,10 +1,12 @@
 package fr.pulsedev.appbuilder;
 
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
+import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
 import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
+import fr.pulsedev.appbuilder.visualeditor.Block;
 import fr.pulsedev.appbuilder.visualeditor.blocks.UI.UITypes;
 
 import javax.swing.*;
@@ -14,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class Main {
@@ -22,6 +26,8 @@ public class Main {
     public static ProjectOptions<String> options = new ProjectOptions<>();
     public static final String RESOURCES_PATH = Paths.get("").toAbsolutePath() + "/src/main/resources/";
     public static String[] args;
+    public static Project PROJECT;
+    public static List<Block<?>> blocksInWindow = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         Main.args = args;

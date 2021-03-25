@@ -70,7 +70,7 @@ public class PopupPanel extends JPanel {
 
                 try {
                     SwingUtilities.getWindowAncestor(this).setVisible(false);
-                    new Project(file);
+                    Main.PROJECT = new Project(file);
                 } catch (ProjectErrors projectErrors) {
                     projectErrors.printStackTrace();
                 }

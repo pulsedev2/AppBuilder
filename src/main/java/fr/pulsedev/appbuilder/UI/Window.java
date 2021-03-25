@@ -1,5 +1,6 @@
 package fr.pulsedev.appbuilder.UI;
 
+import fr.pulsedev.appbuilder.shortcuts.ShortCutsListener;
 import fr.pulsedev.appbuilder.utils.UiUtils;
 
 import javax.swing.*;
@@ -10,14 +11,16 @@ public class Window extends JFrame{
     private final Dimension size;
     private final String name;
     private final int constants;
-    private JPanel panel;
+    private JComponent panel;
     private final boolean resizable;
     private final Color color;
     private final boolean undecorated;
     private final boolean draggable;
     private boolean isRunning = false;
+    private final static ShortCutsListener listener = new ShortCutsListener();
+    private final boolean shortcutsEnabled;
 
-    public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color, boolean undecorated, boolean draggable){
+    public Window(Dimension size, String name, boolean resizable, int constants, JPanel panel, Color color, boolean undecorated, boolean draggable, boolean shortcuts){
         this.size = size;
         this.name = name;
         this.resizable = resizable;
@@ -26,6 +29,7 @@ public class Window extends JFrame{
         this.color = color;
         this.undecorated = undecorated;
         this.draggable = draggable;
+        this.shortcutsEnabled = shortcuts;
     }
 
     public void run(){
@@ -38,6 +42,11 @@ public class Window extends JFrame{
             this.setDefaultCloseOperation(constants);
             this.setResizable(resizable);
             this.setLocationRelativeTo(null);
+            if(this.shortcutsEnabled) {
+                this.setFocusable(true);
+                this.addKeyListener(listener);
+                this.requestFocusInWindow();
+            }
 
             try{
                 this.setUndecorated(undecorated);
@@ -66,7 +75,7 @@ public class Window extends JFrame{
         }
     }
 
-    public void setPanel(JPanel panel){
+    public void setPanel(JComponent panel){
         this.panel = panel;
     }
 
@@ -90,7 +99,7 @@ public class Window extends JFrame{
         return constants;
     }
 
-    public JPanel getPanel() {
+    public JComponent getPanel() {
         return panel;
     }
 
@@ -106,13 +115,19 @@ public class Window extends JFrame{
         private Color color = Color.WHITE;
         private boolean undecorated = true;
         private boolean draggable = false;
+        private boolean shortcuts = false;
 
         public Window createWindow() {
-            return new Window(this.size, this.name, this.resizable, this.constants, this.panel, this.color, this.undecorated, this.draggable);
+            return new Window(this.size, this.name, this.resizable, this.constants, this.panel, this.color, this.undecorated, this.draggable, this.shortcuts);
         }
 
         public Builder setBackground(Color color){
             this.color = color;
+            return this;
+        }
+
+        public Builder addShortcuts(){
+            this.shortcuts = true;
             return this;
         }
 

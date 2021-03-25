@@ -51,7 +51,7 @@ public class ProjectChooserPanel extends JPanel {
                 if (returnedVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     try {
-                        Project.open(file);
+                        Main.PROJECT = Project.open(file);
                         SwingUtilities.getWindowAncestor(this).setVisible(false);
                         PanelManager.EDITOR.window.setPanel(new EditorPanel());
                         PanelManager.EDITOR.window.run();

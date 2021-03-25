@@ -1,8 +1,11 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
+import fr.pulsedev.appbuilder.Main;
+import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.utils.Components;
 import fr.pulsedev.appbuilder.utils.Coordinates;
+import fr.pulsedev.appbuilder.visualeditor.Block;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +19,7 @@ public class DnD {
     private final JComponent component;
     private final ArrayList<Component> toNotDrag;
     private final Container parent;
-    private Component toDrag;
+    private Block<?> toDrag;
     private boolean shouldClone = true;
 
     public DnD(JComponent component, ArrayList<Component> toNotDrag, Container parent){
@@ -51,13 +54,15 @@ public class DnD {
             public void mousePressed(MouseEvent e) {
                 Component componentToDrag = Components.getClickedComponent(component, new Coordinates(e.getX(), e.getY()));
                 if(componentToDrag == null || toNotDrag.contains(componentToDrag))return;
+                if(!(componentToDrag instanceof Block<?>)) return;
                 if(shouldClone){
-                    toDrag = Components.cloneComponent(componentToDrag);
+                    toDrag = (Block<?>) Components.cloneComponent(componentToDrag);
                 }
                 else{
-                    toDrag = componentToDrag;
+                    toDrag = (Block<?>) componentToDrag;
                 }
-                component.add(toDrag);
+                if(!Arrays.asList(component.getComponents()).contains(toDrag))
+                    component.add(toDrag, (int) toDrag.getTagsByName("layer").get(0).getValue());
             }
 
             @Override
@@ -71,7 +76,10 @@ public class DnD {
                     if(shouldClone)
                         parentLocal.remove(toDrag);
                 }
-
+                if (parentLocal instanceof EditorPanel){
+                    if(!Main.blocksInWindow.contains(toDrag))
+                        Main.blocksInWindow.add(toDrag);
+                }
                 toDrag = null;
             }
 
@@ -79,12 +87,14 @@ public class DnD {
             public void mouseDragged(MouseEvent e){
                 super.mouseDragged(e);
                 if(toDrag == null)return;
-                toDrag.setBounds(e.getX(), e.getY(), toDrag.getWidth(), toDrag.getHeight());
-                Container parentLocal = PanelManager.EDITOR.window.getContentPane();
+                toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
                 if(e.getX() > component.getWidth()-toDrag.getWidth()){
+                    Container parentLocal = PanelManager.EDITOR.window.getContentPane();
                     if(parentLocal != null){
-                        parentLocal.add(toDrag);
-                        toDrag.setBounds(e.getX(), e.getY(), toDrag.getWidth(), toDrag.getHeight());
+                        if(!Main.blocksInWindow.contains(toDrag))
+                            Main.blocksInWindow.add(toDrag);
+                        parentLocal.add(toDrag, (int) toDrag.getTagsByName("layer").get(0).getValue());
+                        toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
                     }
                 }
             }
