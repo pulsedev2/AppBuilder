@@ -37,10 +37,10 @@ public class EditorPanel extends JLayeredPane {
         this.setFocusable(false);
 
         leftSlider = new LeftSlider();
-        this.add(leftSlider, -1);
+        this.add(leftSlider);
 
         rightSlider = new RightSlider(new JPanel());
-        this.add(rightSlider, -1);
+        this.add(rightSlider);
 
         JLabel title = new JLabel("Elements");
         MouseAdapter mouseAdapter = new DnD(this, new ArrayList<>() {{
@@ -72,16 +72,18 @@ public class EditorPanel extends JLayeredPane {
         int height = SwingUtilities.getWindowAncestor(this).getHeight();
 
         if (!Arrays.asList(this.getComponents()).contains(leftSlider))
-            this.add(leftSlider, -1);
+            this.add(leftSlider);
 
         leftSlider.repaint(this);
         leftSlider.setBounds(0, 0, (width / 5), height);
+        this.setLayer(leftSlider, Integer.MAX_VALUE);
 
         if (!Arrays.asList(this.getComponents()).contains(rightSlider))
-            this.add(rightSlider, -1);
+            this.add(rightSlider);
 
         rightSlider.repaint();
         rightSlider.setBounds((width - width / 5), 0, width / 5 - 16, height - 40);
+        this.setLayer(rightSlider, Integer.MAX_VALUE);
 
         for (Block<?> block : Main.blocksInWindow) {
 
