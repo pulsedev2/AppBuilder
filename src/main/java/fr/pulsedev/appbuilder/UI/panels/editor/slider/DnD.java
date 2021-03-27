@@ -3,6 +3,8 @@ package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
+import fr.pulsedev.appbuilder.event.EventsRegisters;
+import fr.pulsedev.appbuilder.event.events.blockEvents.BlockDraggedEvent;
 import fr.pulsedev.appbuilder.utils.Components;
 import fr.pulsedev.appbuilder.utils.Coordinates;
 import fr.pulsedev.appbuilder.visualeditor.Block;
@@ -84,19 +86,27 @@ public class DnD {
             }
 
             @Override
-            public void mouseDragged(MouseEvent e){
-                super.mouseDragged(e);
-                if(toDrag == null)return;
+            public void mouseDragged(MouseEvent e) {
+                if (toDrag == null) return;
+
+                BlockDraggedEvent event = new BlockDraggedEvent((Coordinates) toDrag.getTagsByName("coordinates").get(0).getValue(), new Coordinates(e.getX(), e.getY()), toDrag);
+                try {
+                    EventsRegisters.callListener(BlockDraggedEvent.class, event);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
                 toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
-                if(e.getX() > component.getWidth()-toDrag.getWidth()){
+                if (e.getX() > component.getWidth() - toDrag.getWidth()) {
                     Container parentLocal = PanelManager.EDITOR.window.getContentPane();
-                    if(parentLocal != null){
-                        if(!Main.blocksInWindow.contains(toDrag))
+                    if (parentLocal != null) {
+                        if (!Main.blocksInWindow.contains(toDrag))
                             Main.blocksInWindow.add(toDrag);
                         parentLocal.add(toDrag, (int) toDrag.getTagsByName("layer").get(0).getValue());
                         toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
                     }
                 }
+                super.mouseDragged(e);
             }
         };
     }
