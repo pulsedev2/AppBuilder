@@ -1,4 +1,4 @@
-package fr.pulsedev.appbuilder.Languages;
+package fr.pulsedev.appbuilder.languages;
 
 import org.yaml.snakeyaml.Yaml;
 

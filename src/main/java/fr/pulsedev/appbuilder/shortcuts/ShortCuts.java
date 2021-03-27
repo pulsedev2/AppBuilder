@@ -25,7 +25,6 @@ public enum ShortCuts {
         for (ShortCuts shortcut : ShortCuts.values()) {
             if(shortcut.keyPressed.size() == keyPressed.size()){
                 if(shortcut.keyPressed.containsAll(keyPressed)){
-                    System.out.println("Shortcuts called: " + shortcut.name());
                     shortcut.runnable.run();
                 }
             }

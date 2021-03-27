@@ -1,6 +1,6 @@
 package fr.pulsedev.appbuilder.settings;
 
-import fr.pulsedev.appbuilder.Languages.Lang;
+import fr.pulsedev.appbuilder.languages.Lang;
 
 public class Language extends Settings{
 

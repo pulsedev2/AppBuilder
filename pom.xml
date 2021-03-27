@@ -34,6 +34,15 @@
             </roles>
             <timezone>UTC+1</timezone>
         </developer>
+        <developer>
+            <name>SkyfightTV</name>
+            <organization>PulseDev</organization>
+            <organizationUrl>https://pulsedev.fr</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>UTC+1</timezone>
+        </developer>
     </developers>
 
     <dependencies>
@@ -52,6 +61,10 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.8</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.dheid</groupId>
+            <artifactId>colorpicker</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
-
 </project>

@@ -1,14 +1,15 @@
 package fr.pulsedev.appbuilder.utils;
 
 import fr.pulsedev.appbuilder.Main;
-import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.themes.Themes;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -97,7 +98,6 @@ public class UiUtils {
 
         close.addMouseListener(getAdapter(close));
 
-
         UiUtils.makeJButtonTransparent(close);
 
         // Close image computing
@@ -105,6 +105,8 @@ public class UiUtils {
         UiUtils.changeColor(closeImage, Color.BLACK, Theme.USER.themesInterface.getTEXT());
         closeImage = UiUtils.resize(closeImage, 15, 15);
         close.setIcon(new ImageIcon(closeImage));
+
+        close.setFocusable(false);
 
         return close;
     }
@@ -150,5 +152,13 @@ public class UiUtils {
             Point mouseLoc = e.getLocationOnScreen();
             FRAME.setLocation(mouseLoc.x - deltaMouse.x, mouseLoc.y - deltaMouse.y);
         }
+    }
+
+    public static void numberOnly(JTextComponent jTextComponent, boolean decimal, boolean negative) {
+        jTextComponent.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                jTextComponent.setEditable((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || (ke.getKeyChar() == '.' && decimal) || (ke.getKeyChar() == '-' && negative) || (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE));
+            }
+        });
     }
 }

@@ -18,6 +18,7 @@ public class JTextArea extends Block<TextAreaUI> {
             new Tag<Boolean>("visible", true, Boolean.class),
             new Tag<Color>("color", new Color(255, 255, 255), Color.class),
             new Tag<Coordinates>("coordinates", new Coordinates(0, 0), Coordinates.class),
+            new Tag<Dimension>("dimension", new Dimension(100, 75), Dimension.class),
             new Tag<Integer>("layer", 1, Integer.class)
     );
 
@@ -26,7 +27,8 @@ public class JTextArea extends Block<TextAreaUI> {
         super.setTags(TAGS);
         setUI(new TextAreaUI());
         Coordinates coordinates = (Coordinates) super.getTagsByName("coordinates").get(0).getValue();
-        setBounds(coordinates.getX(), coordinates.getY(), 100, 200);
+        Dimension dimension = (Dimension) super.getTagsByName("dimension").get(0).getValue();
+        setBounds(coordinates.getX(), coordinates.getY(), dimension.width, dimension.height);
     }
 
     @Override
@@ -34,7 +36,8 @@ public class JTextArea extends Block<TextAreaUI> {
         this.setVisible((boolean) super.getTagsByName("visible").get(0).getValue());
         this.setForeground((Color) super.getTagsByName("color").get(0).getValue());
         Coordinates coordinates = (Coordinates) super.getTagsByName("coordinates").get(0).getValue();
-        setBounds(coordinates.getX(), coordinates.getY(), 100, 200);
+        Dimension dimension = (Dimension) super.getTagsByName("dimension").get(0).getValue();
+        setBounds(coordinates.getX(), coordinates.getY(), dimension.width, dimension.height);
         this.repaint();
     }
 

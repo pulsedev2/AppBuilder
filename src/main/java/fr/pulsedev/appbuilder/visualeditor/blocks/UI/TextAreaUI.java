@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class TextAreaUI extends ComponentUI{
 
-    public static final String NAME = "TextAreaUI";
+    public static final String NAME = "TextAreaUI_";
 
     public static ComponentUI createUI(JComponent c){
         return new TextAreaUI();

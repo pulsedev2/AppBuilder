@@ -1,7 +1,7 @@
 package fr.pulsedev.appbuilder.UI.panels;
 
-import fr.pulsedev.appbuilder.Languages.Lang;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
+import fr.pulsedev.appbuilder.languages.Lang;
 import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Settings;
 import fr.pulsedev.appbuilder.settings.Theme;
@@ -11,9 +11,9 @@ import fr.pulsedev.appbuilder.utils.UiUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
 import java.util.Timer;
+import java.util.*;
 
 public class SettingsPanel extends JPanel {
 

@@ -17,14 +17,12 @@ public class ShortCutsListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (keyPressed.contains(e.getKeyCode())) return;
         keyPressed.add(e.getKeyCode());
-        System.out.println(e.getKeyChar() + "↓ (" +e.getKeyCode() + ")");
         ShortCuts.executeShortcuts(keyPressed);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if (!keyPressed.contains(e.getKeyCode())) return;
-        keyPressed.remove(keyPressed.indexOf(e.getKeyCode()));
-        System.out.println(e.getKeyChar() + "↑ (" +e.getKeyCode() + ")");
+        keyPressed.remove((Integer) e.getKeyCode());
     }
 }
