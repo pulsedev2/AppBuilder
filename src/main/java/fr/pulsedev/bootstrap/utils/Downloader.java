@@ -17,8 +17,7 @@ public class Downloader {
     1 = Erreur de la connection
     2 = Connection réussi
     3 = Téléchargement en cours
-    4 = Téléchargement terminé
-    * */
+    4 = Téléchargement terminé*/
     private int state;
 
     private HttpURLConnection connection;
