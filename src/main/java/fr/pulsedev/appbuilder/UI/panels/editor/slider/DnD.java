@@ -102,7 +102,11 @@ public class DnD {
                     if (parentLocal != null) {
                         if (!Main.blocksInWindow.contains(toDrag))
                             Main.blocksInWindow.add(toDrag);
-                        parentLocal.add(toDrag, (int) toDrag.getTagsByName("layer").get(0).getValue());
+
+                        if (toDrag.getLocation().getX() < parentLocal.getLocation().getX()
+                                && toDrag.getLocation().getY() < parentLocal.getLocation().getY())
+                            parentLocal.add(toDrag, (int) toDrag.getTagsByName("layer").get(0).getValue());
+
                         toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
                     }
                 }
