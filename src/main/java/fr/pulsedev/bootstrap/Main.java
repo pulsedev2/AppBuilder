@@ -8,7 +8,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
-    private static final String fileLocation = System.getenv("APPDATA") + "\\AppBuilder\\Bootstrap\\AppBuilder.jar";
+    private static final String fileLocation = System.getenv("APPDATA") + "\\AppBuilder\\Bootstrap\\AppBuilder.exe";
+    public static Downloader downloader;
     private static Window window;
 
     public static void main(String[] args) {
@@ -22,9 +23,11 @@ public class Main {
     }
 
     private static void update() {
-        JProgressBar progressBar = window.getBootstrapPanel().progressBar;
+        JProgressBar progressBar = window.getBootstrapPanel().getProgressBar();
 
-        Downloader downloader = new Downloader("https://github.com/pulsedev2/AppBuilder/releases/latest/download/AppBuilder.jar", new File(fileLocation));
+        //https://github.com/pulsedev2/AppBuilder/releases/latest/download/AppBuilder.jar
+        downloader = new Downloader("https://download.amd.com/Desktop/AMD-Ryzen-Master.exe", new File(fileLocation));
+
         downloader.connect();
 
         progressBar.setValue(0);
@@ -32,7 +35,8 @@ public class Main {
 
         downloader.startAsync();
 
-        while (progressBar.getValue() != progressBar.getMaximum() && downloader.getState() != 4) {
+        while (progressBar.getValue() != progressBar.getMaximum()
+                && downloader.getState() != 4) {
             progressBar.setValue(downloader.getDownloaded());
 
             try {
