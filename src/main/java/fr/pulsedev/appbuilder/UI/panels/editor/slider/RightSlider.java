@@ -33,7 +33,7 @@ public class RightSlider extends JScrollPane {
     private UpdateCoordinatesListener updateCoordinatesListener;
 
     public RightSlider(JPanel panel) {
-        super(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        super(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.panel = panel;
 
         setBorder(null);
@@ -388,5 +388,9 @@ public class RightSlider extends JScrollPane {
             this.alreadyPaint = false;
             updateCoordinatesListener = null;
         }
+    }
+
+    public void setClickedBlock(Block<?> clickedBlock) {
+        this.clickedBlock = clickedBlock;
     }
 }

@@ -69,17 +69,23 @@ public class DnD {
 
             @Override
             public void mouseReleased(MouseEvent e){
-                if(toDrag==null) return;
-                if(shouldClone)
+                if (toDrag == null) return;
+                if (shouldClone)
                     component.remove(toDrag);
                 Container parentLocal = PanelManager.EDITOR.window.getContentPane();
                 Component[] components = parentLocal.getComponents();
-                if(toDrag.getX() <= component.getWidth() && Arrays.asList(components).contains(toDrag)) {
-                    if(shouldClone)
+                if (parentLocal.getComponentAt(toDrag.getLocation()) != toDrag) {
+                    Main.blocksInWindow.remove(toDrag);
+                    PanelManager.EDITOR.window.remove(toDrag);
+                    EditorPanel.getRightSlider().setClickedBlock(null);
+                    return;
+                }
+                if (toDrag.getX() <= component.getWidth() && Arrays.asList(components).contains(toDrag)) {
+                    if (shouldClone)
                         parentLocal.remove(toDrag);
                 }
-                if (parentLocal instanceof EditorPanel){
-                    if(!Main.blocksInWindow.contains(toDrag))
+                if (parentLocal instanceof EditorPanel) {
+                    if (!Main.blocksInWindow.contains(toDrag))
                         Main.blocksInWindow.add(toDrag);
                 }
                 toDrag = null;

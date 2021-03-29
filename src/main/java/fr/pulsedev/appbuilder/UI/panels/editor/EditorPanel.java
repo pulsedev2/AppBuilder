@@ -19,8 +19,8 @@ import java.util.TimerTask;
 public class EditorPanel extends JLayeredPane {
 
     BufferedImage bg = UiUtils.generateBackgroundImage(Theme.USER);
-    LeftSlider leftSlider;
-    RightSlider rightSlider;
+    private static LeftSlider leftSlider;
+    private static RightSlider rightSlider;
 
     public EditorPanel() {
 
@@ -94,5 +94,13 @@ public class EditorPanel extends JLayeredPane {
             block.update();
         }
 
+    }
+
+    public static LeftSlider getLeftSlider() {
+        return leftSlider;
+    }
+
+    public static RightSlider getRightSlider() {
+        return rightSlider;
     }
 }
