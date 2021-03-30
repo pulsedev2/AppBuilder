@@ -74,7 +74,7 @@ public class DnD {
                     component.remove(toDrag);
                 Container parentLocal = PanelManager.EDITOR.window.getContentPane();
                 Component[] components = parentLocal.getComponents();
-                if (parentLocal.getComponentAt(toDrag.getLocation()) != toDrag) {
+                if (!(parentLocal.getComponentAt(toDrag.getLocation()) instanceof Block<?>)) {
                     Main.blocksInWindow.remove(toDrag);
                     PanelManager.EDITOR.window.remove(toDrag);
                     EditorPanel.getRightSlider().setClickedBlock(null);
