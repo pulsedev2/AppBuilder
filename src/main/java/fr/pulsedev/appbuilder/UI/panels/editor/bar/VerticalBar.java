@@ -1,6 +1,6 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.bar;
 
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
+import fr.pulsedev.appbuilder.UI.panels.MainPanel;
 import fr.pulsedev.appbuilder.settings.Language;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.JVerticalButton;
@@ -32,7 +32,7 @@ public class VerticalBar extends JPanel {
         });
 
         this.add(visuel);
-        visuel.setBounds(0, 0, EditorPanel.verticalBarWidth, 100);
+        visuel.setBounds(0, 0, MainPanel.verticalBarWidth, 100);
 
         code.setText(Language.USER.interface_.getString("vertical_bar.bp"));
         code.setBorderPainted(false);
@@ -48,6 +48,6 @@ public class VerticalBar extends JPanel {
         });
 
         this.add(code);
-        code.setBounds(0, visuel.getHeight(), EditorPanel.verticalBarWidth, 100);
+        code.setBounds(0, visuel.getHeight(), MainPanel.verticalBarWidth, 100);
     }
 }

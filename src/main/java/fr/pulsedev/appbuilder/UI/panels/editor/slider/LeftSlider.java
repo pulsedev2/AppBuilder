@@ -1,6 +1,6 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
+import fr.pulsedev.appbuilder.UI.panels.MainPanel;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.utils.Coordinates;
 import fr.pulsedev.appbuilder.utils.UiUtils;
@@ -41,7 +41,9 @@ public class LeftSlider extends JDesktopPane {
 
         ((BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
 
-        MouseAdapter mouseAdapter = new DnD(panel, new ArrayList<>(){{add(title);}}, EditorPanel.getSliderPanel()).getDnD();
+        MouseAdapter mouseAdapter = new DnD(panel, new ArrayList<>() {{
+            add(title);
+        }}, MainPanel.getEditorPanel()).getDnD();
         panel.addMouseMotionListener(mouseAdapter);
         panel.addMouseListener(mouseAdapter);
 

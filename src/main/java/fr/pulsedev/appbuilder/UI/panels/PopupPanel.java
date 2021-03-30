@@ -2,7 +2,6 @@ package fr.pulsedev.appbuilder.UI.panels;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.Window;
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.ProjectOptions;
@@ -76,7 +75,7 @@ public class PopupPanel extends JPanel {
                 }
             }
 
-            PanelManager.EDITOR.window.setPanel(new EditorPanel());
+            PanelManager.EDITOR.window.setPanel(new MainPanel());
             PanelManager.EDITOR.window.run();
         };
 

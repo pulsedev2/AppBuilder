@@ -1,7 +1,7 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
 import com.bric.colorpicker.ColorPicker;
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
+import fr.pulsedev.appbuilder.UI.panels.MainPanel;
 import fr.pulsedev.appbuilder.UI.panels.editor.slider.listeners.UpdateCoordinatesListener;
 import fr.pulsedev.appbuilder.event.EventsRegisters;
 import fr.pulsedev.appbuilder.languages.Lang;
@@ -55,7 +55,7 @@ public class RightSlider extends JScrollPane {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Component jComponent = EditorPanel.getSliderPanel().getComponentAt(e.getX(), e.getY());
+                Component jComponent = MainPanel.getEditorPanel().getComponentAt(e.getX(), e.getY());
 
                 if (jComponent instanceof Block) {
                     if (jComponent != clickedBlock) {
@@ -80,7 +80,6 @@ public class RightSlider extends JScrollPane {
             JComponent currentComponent = clickedBlock;
             List<Tag<?>> tagList = clickedBlock.getTags();
 
-
             for (Tag<?> tag : tagList) {
                 JLabel label = new JLabel(tag.getName().replaceFirst(".", (tag.getName().charAt(0) + "").toUpperCase()));
                 label.setBackground(null);
@@ -104,6 +103,7 @@ public class RightSlider extends JScrollPane {
                                     && this.clickedBlock != null
                                     && currentComponent == this.clickedBlock) {
                                 this.clickedBlock.editTag(tag.getName(), textField.getText());
+                                this.clickedBlock.update();
                             }
                         };
 
@@ -213,7 +213,7 @@ public class RightSlider extends JScrollPane {
                             while (xTextField.hasFocus()
                                     && this.clickedBlock != null
                                     && currentComponent == this.clickedBlock) {
-                                if (!xTextField.getText().equals("")) {
+                                if (!xTextField.getText().isEmpty()) {
                                     this.clickedBlock.editTag(tag.getName(), new Coordinates(Integer.parseInt(xTextField.getText()), ((Coordinates) tag.getValue()).getY()));
                                     this.clickedBlock.update();
                                 }
@@ -250,7 +250,7 @@ public class RightSlider extends JScrollPane {
                             while (yTextField.hasFocus()
                                     && this.clickedBlock != null
                                     && currentComponent == this.clickedBlock) {
-                                if (!yTextField.getText().equals("")) {
+                                if (!yTextField.getText().isEmpty()) {
                                     this.clickedBlock.editTag(tag.getName(), new Coordinates(((Coordinates) tag.getValue()).getX(), Integer.parseInt(yTextField.getText())));
                                     this.clickedBlock.update();
                                 }
@@ -293,7 +293,7 @@ public class RightSlider extends JScrollPane {
                             while (xTextField.hasFocus()
                                     && this.clickedBlock != null
                                     && currentComponent == this.clickedBlock) {
-                                if (!xTextField.getText().equals("")) {
+                                if (!xTextField.getText().isEmpty()) {
                                     this.clickedBlock.editTag(tag.getName(), new Dimension((int) Double.parseDouble(xTextField.getText()), (int) ((Dimension) tag.getValue()).getHeight()));
                                     this.clickedBlock.update();
                                 }
@@ -331,7 +331,7 @@ public class RightSlider extends JScrollPane {
                             while (yTextField.hasFocus()
                                     && this.clickedBlock != null
                                     && currentComponent == this.clickedBlock) {
-                                if (!yTextField.getText().equals("")) {
+                                if (!yTextField.getText().isEmpty()) {
                                     this.clickedBlock.editTag(tag.getName(), new Dimension((int) ((Dimension) tag.getValue()).getWidth(), (int) Double.parseDouble(yTextField.getText())));
                                     this.clickedBlock.update();
                                 }
@@ -363,7 +363,7 @@ public class RightSlider extends JScrollPane {
 
                         Runnable runnable = () -> {
                             while (textField.hasFocus() && this.clickedBlock != null) {
-                                if (!textField.getText().equals("")) {
+                                if (!textField.getText().isEmpty()) {
                                     this.clickedBlock.editTag(tag.getName(), Integer.parseInt(textField.getText()));
                                     this.clickedBlock.update();
                                 }

@@ -2,7 +2,6 @@ package fr.pulsedev.appbuilder.UI.panels;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.Window;
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.projects.Project;
 import fr.pulsedev.appbuilder.projects.errors.ProjectErrors;
@@ -53,7 +52,7 @@ public class ProjectChooserPanel extends JPanel {
                     try {
                         Main.PROJECT = Project.open(file);
                         SwingUtilities.getWindowAncestor(this).setVisible(false);
-                        PanelManager.EDITOR.window.setPanel(new EditorPanel());
+                        PanelManager.EDITOR.window.setPanel(new MainPanel());
                         PanelManager.EDITOR.window.run();
                     } catch (ProjectErrors projectErrors) {
                         projectErrors.printStackTrace();

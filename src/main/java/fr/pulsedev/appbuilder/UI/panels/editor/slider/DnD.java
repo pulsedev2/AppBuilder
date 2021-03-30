@@ -1,8 +1,8 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
 import fr.pulsedev.appbuilder.Main;
+import fr.pulsedev.appbuilder.UI.panels.MainPanel;
 import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
-import fr.pulsedev.appbuilder.UI.panels.editor.SliderPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.event.EventsRegisters;
 import fr.pulsedev.appbuilder.event.events.blockEvents.BlockDraggedEvent;
@@ -75,15 +75,15 @@ public class DnD {
                     component.remove(toDrag);
 
                 Container parentLocal = null;
-                if (PanelManager.EDITOR.window.getContentPane() instanceof EditorPanel)
-                    parentLocal = EditorPanel.getSliderPanel();
+                if (PanelManager.EDITOR.window.getContentPane() instanceof MainPanel)
+                    parentLocal = MainPanel.getEditorPanel();
 
                 assert parentLocal != null;
                 Component[] components = parentLocal.getComponents();
                 if (!(parentLocal.getComponentAt(toDrag.getLocation()) instanceof Block<?>)) {
                     Main.blocksInWindow.remove(toDrag);
-                    EditorPanel.getSliderPanel().remove(toDrag);
-                    SliderPanel.getRightSlider().setClickedBlock(null);
+                    MainPanel.getEditorPanel().remove(toDrag);
+                    EditorPanel.getRightSlider().setClickedBlock(null);
                     return;
                 }
                 if (toDrag.getX() <= component.getWidth() && Arrays.asList(components).contains(toDrag)) {
@@ -109,8 +109,8 @@ public class DnD {
                 toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
                 if (e.getX() > component.getWidth() - toDrag.getWidth()) {
                     Container parentLocal = null;
-                    if (PanelManager.EDITOR.window.getContentPane() instanceof EditorPanel)
-                        parentLocal = EditorPanel.getSliderPanel();
+                    if (PanelManager.EDITOR.window.getContentPane() instanceof MainPanel)
+                        parentLocal = MainPanel.getEditorPanel();
 
                     if (parentLocal != null) {
                         if (!Main.blocksInWindow.contains(toDrag))
