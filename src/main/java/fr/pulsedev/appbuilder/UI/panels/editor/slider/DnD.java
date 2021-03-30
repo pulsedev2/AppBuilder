@@ -2,6 +2,7 @@ package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
+import fr.pulsedev.appbuilder.UI.panels.editor.SliderPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.event.EventsRegisters;
 import fr.pulsedev.appbuilder.event.events.blockEvents.BlockDraggedEvent;
@@ -68,26 +69,29 @@ public class DnD {
             }
 
             @Override
-            public void mouseReleased(MouseEvent e){
+            public void mouseReleased(MouseEvent e) {
                 if (toDrag == null) return;
                 if (shouldClone)
                     component.remove(toDrag);
-                Container parentLocal = PanelManager.EDITOR.window.getContentPane();
+
+                Container parentLocal = null;
+                if (PanelManager.EDITOR.window.getContentPane() instanceof EditorPanel)
+                    parentLocal = EditorPanel.getSliderPanel();
+
+                assert parentLocal != null;
                 Component[] components = parentLocal.getComponents();
                 if (!(parentLocal.getComponentAt(toDrag.getLocation()) instanceof Block<?>)) {
                     Main.blocksInWindow.remove(toDrag);
-                    PanelManager.EDITOR.window.remove(toDrag);
-                    EditorPanel.getRightSlider().setClickedBlock(null);
+                    EditorPanel.getSliderPanel().remove(toDrag);
+                    SliderPanel.getRightSlider().setClickedBlock(null);
                     return;
                 }
                 if (toDrag.getX() <= component.getWidth() && Arrays.asList(components).contains(toDrag)) {
                     if (shouldClone)
                         parentLocal.remove(toDrag);
                 }
-                if (parentLocal instanceof EditorPanel) {
-                    if (!Main.blocksInWindow.contains(toDrag))
-                        Main.blocksInWindow.add(toDrag);
-                }
+                if (!Main.blocksInWindow.contains(toDrag))
+                    Main.blocksInWindow.add(toDrag);
                 toDrag = null;
             }
 
@@ -104,7 +108,10 @@ public class DnD {
 
                 toDrag.editTag("coordinates", new Coordinates(e.getX(), e.getY()));
                 if (e.getX() > component.getWidth() - toDrag.getWidth()) {
-                    Container parentLocal = PanelManager.EDITOR.window.getContentPane();
+                    Container parentLocal = null;
+                    if (PanelManager.EDITOR.window.getContentPane() instanceof EditorPanel)
+                        parentLocal = EditorPanel.getSliderPanel();
+
                     if (parentLocal != null) {
                         if (!Main.blocksInWindow.contains(toDrag))
                             Main.blocksInWindow.add(toDrag);
