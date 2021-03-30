@@ -1,8 +1,8 @@
 package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
 import com.bric.colorpicker.ColorPicker;
+import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.editor.slider.listeners.UpdateCoordinatesListener;
-import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.event.EventsRegisters;
 import fr.pulsedev.appbuilder.languages.Lang;
 import fr.pulsedev.appbuilder.settings.Language;
@@ -55,7 +55,7 @@ public class RightSlider extends JScrollPane {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Component jComponent = PanelManager.EDITOR.window.getContentPane().getComponentAt(e.getX(), e.getY());
+                Component jComponent = EditorPanel.getSliderPanel().getComponentAt(e.getX(), e.getY());
 
                 if (jComponent instanceof Block) {
                     if (jComponent != clickedBlock) {
