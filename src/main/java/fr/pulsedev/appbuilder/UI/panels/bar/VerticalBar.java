@@ -1,4 +1,4 @@
-package fr.pulsedev.appbuilder.UI.panels.editor.bar;
+package fr.pulsedev.appbuilder.UI.panels.bar;
 
 import fr.pulsedev.appbuilder.UI.panels.MainPanel;
 import fr.pulsedev.appbuilder.settings.Language;
