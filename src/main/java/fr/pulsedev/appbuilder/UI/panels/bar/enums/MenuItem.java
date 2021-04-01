@@ -78,15 +78,6 @@ public enum MenuItem {
         this(TYPE, IS_ITEM, TEXT, ACTION_LISTENER, new ArrayList<>());
     }
 
-    public static List<MenuItem> getByType(MenuTypes type) {
-        List<MenuItem> menuItems = new ArrayList<>();
-        for (MenuItem menuItem : MenuItem.values())
-            if (menuItem.getTYPE() == type)
-                menuItems.add(menuItem);
-
-        return menuItems;
-    }
-
     public MenuTypes getTYPE() {
         return TYPE;
     }
@@ -105,5 +96,14 @@ public enum MenuItem {
 
     public List<?> getSUB_ITEM() {
         return SUB_ITEM;
+    }
+
+    public static List<MenuItem> getByType(MenuTypes type) {
+        List<MenuItem> menuItems = new ArrayList<>();
+        for (MenuItem menuItem : MenuItem.values())
+            if (menuItem.getTYPE() == type)
+                menuItems.add(menuItem);
+
+        return menuItems;
     }
 }

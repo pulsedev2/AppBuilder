@@ -19,15 +19,6 @@ public enum MenuSubItem {
         this.ACTION_LISTENER = ACTION_LISTENER;
     }
 
-    public static List<MenuSubItem> getByItem(MenuItem item) {
-        List<MenuSubItem> menuSubItems = new ArrayList<>();
-        for (MenuSubItem menuSubItem : MenuSubItem.values())
-            if (menuSubItem.getIS_ITEM() == item)
-                menuSubItems.add(menuSubItem);
-
-        return menuSubItems;
-    }
-
     public MenuItem getIS_ITEM() {
         return ITEM;
     }
@@ -42,5 +33,14 @@ public enum MenuSubItem {
 
     public ActionListener getACTION_LISTENER() {
         return ACTION_LISTENER;
+    }
+
+    public static List<MenuSubItem> getByItem(MenuItem item) {
+        List<MenuSubItem> menuSubItems = new ArrayList<>();
+        for (MenuSubItem menuSubItem : MenuSubItem.values())
+            if (menuSubItem.getIS_ITEM() == item)
+                menuSubItems.add(menuSubItem);
+
+        return menuSubItems;
     }
 }
