@@ -1,16 +1,19 @@
 package fr.pulsedev.appbuilder.UI.panels;
 
+import fr.pulsedev.appbuilder.UI.panels.bar.HorizontalBar;
+import fr.pulsedev.appbuilder.UI.panels.bar.VerticalBar;
 import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
-import fr.pulsedev.appbuilder.UI.panels.editor.bar.VerticalBar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.TimerTask;
 
 public class MainPanel extends JDesktopPane {
-    public static final int verticalBarWidth = 50;
+    public static final int verticalBarWidth = 35;
+    public static final int horizontalBarHeight = 40;
     private static EditorPanel editorPanel;
     VerticalBar verticalBar;
+    HorizontalBar horizontalBar;
 
     public MainPanel() {
         this.setLayout(null);
@@ -27,11 +30,12 @@ public class MainPanel extends JDesktopPane {
 
         editorPanel = new EditorPanel();
         this.add(editorPanel);
-        editorPanel.setBounds(55, 0, this.getWidth(), this.getHeight());
 
         verticalBar = new VerticalBar();
         this.add(verticalBar);
-        verticalBar.setBounds(0, 0, 50, this.getHeight());
+
+        horizontalBar = new HorizontalBar();
+        this.add(horizontalBar);
     }
 
     public static EditorPanel getEditorPanel() {
@@ -45,8 +49,10 @@ public class MainPanel extends JDesktopPane {
         int width = SwingUtilities.getWindowAncestor(this).getWidth();
         int height = SwingUtilities.getWindowAncestor(this).getHeight();
 
-        editorPanel.setBounds(verticalBarWidth + 5, 0, width - (verticalBarWidth + 5), height);
+        editorPanel.setBounds(verticalBarWidth + 5, horizontalBarHeight, width - (verticalBarWidth + 5), height);
 
-        verticalBar.setBounds(0, 0, verticalBarWidth, height);
+        verticalBar.setBounds(0, horizontalBarHeight, verticalBarWidth, height);
+
+        horizontalBar.setBounds(0, 0, width, horizontalBarHeight);
     }
 }

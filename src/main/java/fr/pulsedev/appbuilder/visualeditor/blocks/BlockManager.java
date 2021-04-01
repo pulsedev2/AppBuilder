@@ -23,4 +23,12 @@ public enum BlockManager {
         }
         return null;
     }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public Class<? extends Block<?>> getClazz() {
+        return aClass;
+    }
 }

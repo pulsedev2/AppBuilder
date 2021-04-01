@@ -1,9 +1,9 @@
 package fr.pulsedev.appbuilder.UI.panels.enums;
 
 import fr.pulsedev.appbuilder.UI.Window;
+import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
 import fr.pulsedev.appbuilder.UI.panels.RestartIdePanel;
 import fr.pulsedev.appbuilder.UI.panels.SettingsPanel;
-import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
 import fr.pulsedev.appbuilder.settings.Theme;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ public enum  PanelManager {
             .setResizable(true)
             .setBackground(Theme.USER.themesInterface.getBACKGROUND())
             .setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()))
-            .setUndecorated(false)
+            .setUndecorated(true)
             .addShortcuts()
             .createWindow()),
     PROJECT(new Window.Builder()

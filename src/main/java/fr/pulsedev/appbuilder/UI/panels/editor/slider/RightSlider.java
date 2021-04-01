@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RightSlider extends JScrollPane {
     private final JPanel panel;
     private final JPanel subPanel = new JPanel();
-    private Block<?> clickedBlock;
+    public Block<?> clickedBlock;
     private boolean alreadyPaint = false;
     private UpdateCoordinatesListener updateCoordinatesListener;
 

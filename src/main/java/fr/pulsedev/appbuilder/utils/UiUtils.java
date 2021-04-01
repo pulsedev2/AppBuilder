@@ -1,8 +1,11 @@
 package fr.pulsedev.appbuilder.utils;
 
 import fr.pulsedev.appbuilder.Main;
+import fr.pulsedev.appbuilder.UI.panels.MainPanel;
+import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.settings.Theme;
 import fr.pulsedev.appbuilder.themes.Themes;
+import fr.pulsedev.appbuilder.visualeditor.Block;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -62,9 +65,9 @@ public class UiUtils {
         BufferedImage bufferedImage = new BufferedImage(7680, 4320, BufferedImage.TYPE_INT_ARGB);
         for (int y = 0; y < bufferedImage.getHeight(); y++) {
             for (int x = 0; x < bufferedImage.getWidth(); x++) {
-                if(x%10 == 0 && y%10 == 0){
+                if (x % 10 == 0 && y % 10 == 0) {
                     bufferedImage.setRGB(x, y, theme.themesInterface.getLIGHTER_BACKGROUND().getRGB());
-                }else {
+                } else {
                     bufferedImage.setRGB(x, y, theme.themesInterface.getBACKGROUND().getRGB());
                 }
             }
@@ -73,13 +76,18 @@ public class UiUtils {
         return bufferedImage;
     }
 
-    public static String lowCaseApartTheFirstChar(String string){
-        String result = string.toLowerCase();
-
-        return result.substring(0,1).toUpperCase() + result.substring(1);
+    public static Color getContrastColor(Color color) {
+        double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000d;
+        return y >= 128 ? Color.black : Color.white;
     }
 
-    public static JButton getCloseButton(){
+    public static String lowCaseApartTheFirstChar(String string) {
+        String result = string.toLowerCase();
+
+        return result.substring(0, 1).toUpperCase() + result.substring(1);
+    }
+
+    public static JButton getCloseButton() {
         return getCloseButton(null);
     }
 
@@ -160,5 +168,11 @@ public class UiUtils {
                 jTextComponent.setEditable((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || (ke.getKeyChar() == '.' && decimal) || (ke.getKeyChar() == '-' && negative) || (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE));
             }
         });
+    }
+
+    public static void removeBlock(Block<?> block) {
+        Main.blocksInWindow.remove(block);
+        MainPanel.getEditorPanel().remove(block);
+        EditorPanel.getRightSlider().setClickedBlock(null);
     }
 }
