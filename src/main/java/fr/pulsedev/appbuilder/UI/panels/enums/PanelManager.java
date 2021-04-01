@@ -17,6 +17,7 @@ public enum  PanelManager {
             .setBackground(Theme.USER.themesInterface.getBACKGROUND())
             .setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()))
             .setUndecorated(true)
+            .setDraggable(true)
             .addShortcuts()
             .createWindow()),
     PROJECT(new Window.Builder()
