@@ -30,8 +30,9 @@ public class HorizontalBar extends JPanel {
     private final JButton CLOSE_BUTTON = new JButton(new ImageIcon(UiUtils.resize(UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/close_2.png")), MainPanel.horizontalBarHeight - 10, MainPanel.horizontalBarHeight - 10)));
     private final JButton FULL_BUTTON = new JButton(new ImageIcon(UiUtils.resize(UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/full_screen.png")), MainPanel.horizontalBarHeight - 10, MainPanel.horizontalBarHeight - 10)));
     private final JButton MINIM_BUTTON = new JButton(new ImageIcon(UiUtils.resize(UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/minimize.png")), MainPanel.horizontalBarHeight - 10, MainPanel.horizontalBarHeight - 10)));
-    private Image logo;
+
     private Rectangle oldWindowsrect;
+    private Image logo;
 
     public HorizontalBar() {
         this.setLayout(null);
@@ -126,7 +127,7 @@ public class HorizontalBar extends JPanel {
                             item.add(subItem);
                         }
                     } else {
-                        fileItem.getSUB_ITEM().forEach(item::add);
+                        ((List<JMenuItem>) fileItem.getSUB_ITEM()).forEach(item::add);
                     }
                 }
                 item.setBorderPainted(false);
