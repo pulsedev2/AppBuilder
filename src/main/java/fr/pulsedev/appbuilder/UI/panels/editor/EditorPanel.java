@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class EditorPanel extends JLayeredPane {
 
@@ -77,7 +78,7 @@ public class EditorPanel extends JLayeredPane {
             this.add(rightSlider);
 
         rightSlider.repaint();
-        rightSlider.setBounds((this.getWidth() - this.getWidth() / 5), 0, this.getWidth() / 5 - 16, this.getHeight() - 39);
+        rightSlider.setBounds((this.getWidth() - this.getWidth() / 5), 0, this.getWidth() / 5, this.getHeight() - 39);
         this.setLayer(rightSlider, Integer.MAX_VALUE);
 
         for (Block<?> block : Main.blocksInWindow) {
@@ -89,5 +90,14 @@ public class EditorPanel extends JLayeredPane {
             block.update();
         }
 
+        List<Component> componentList = new ArrayList<>();
+        for (Component component : this.getComponents()) {
+            if (component instanceof Block<?>
+                    && !Main.blocksInWindow.contains(component)) {
+                componentList.add(component);
+            }
+        }
+
+        componentList.forEach(this::remove);
     }
 }

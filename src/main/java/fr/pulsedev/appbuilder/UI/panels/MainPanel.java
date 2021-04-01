@@ -9,8 +9,8 @@ import java.awt.*;
 import java.util.TimerTask;
 
 public class MainPanel extends JDesktopPane {
-    public static final int verticalBarWidth = 20;
-    public static final int horizontalBarHeight = 30;
+    public static final int verticalBarWidth = 35;
+    public static final int horizontalBarHeight = 40;
     private static EditorPanel editorPanel;
     VerticalBar verticalBar;
     HorizontalBar horizontalBar;

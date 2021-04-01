@@ -2,12 +2,12 @@ package fr.pulsedev.appbuilder.UI.panels.editor.slider;
 
 import fr.pulsedev.appbuilder.Main;
 import fr.pulsedev.appbuilder.UI.panels.MainPanel;
-import fr.pulsedev.appbuilder.UI.panels.editor.EditorPanel;
 import fr.pulsedev.appbuilder.UI.panels.enums.PanelManager;
 import fr.pulsedev.appbuilder.event.EventsRegisters;
 import fr.pulsedev.appbuilder.event.events.blockEvents.BlockDraggedEvent;
 import fr.pulsedev.appbuilder.utils.Components;
 import fr.pulsedev.appbuilder.utils.Coordinates;
+import fr.pulsedev.appbuilder.utils.UiUtils;
 import fr.pulsedev.appbuilder.visualeditor.Block;
 
 import javax.swing.*;
@@ -81,9 +81,7 @@ public class DnD {
                 assert parentLocal != null;
                 Component[] components = parentLocal.getComponents();
                 if (!(parentLocal.getComponentAt(toDrag.getLocation()) instanceof Block<?>)) {
-                    Main.blocksInWindow.remove(toDrag);
-                    MainPanel.getEditorPanel().remove(toDrag);
-                    EditorPanel.getRightSlider().setClickedBlock(null);
+                    UiUtils.removeBlock(toDrag);
                     return;
                 }
                 if (toDrag.getX() <= component.getWidth() && Arrays.asList(components).contains(toDrag)) {
