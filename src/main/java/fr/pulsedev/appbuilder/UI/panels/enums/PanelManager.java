@@ -3,7 +3,6 @@ package fr.pulsedev.appbuilder.UI.panels.enums;
 import fr.pulsedev.appbuilder.UI.Window;
 import fr.pulsedev.appbuilder.UI.panels.ProjectChooserPanel;
 import fr.pulsedev.appbuilder.UI.panels.RestartIdePanel;
-import fr.pulsedev.appbuilder.UI.panels.SettingsPanel;
 import fr.pulsedev.appbuilder.settings.Theme;
 
 import javax.swing.*;
@@ -22,19 +21,11 @@ public enum  PanelManager {
             .createWindow()),
     PROJECT(new Window.Builder()
             .setName("Projects")
+            .setSize(new Dimension(800, 630))
             .setPanel(new ProjectChooserPanel())
             .setResizable(false)
             .setDraggable(true)
             .setBackground(Theme.USER.themesInterface.getBACKGROUND())
-            .createWindow()),
-    SETTINGS(new Window.Builder()
-            .setName("Settings")
-            .setPanel(new SettingsPanel())
-            .setResizable(false)
-            .setDraggable(false)
-            .setBackground(Theme.USER.themesInterface.getBACKGROUND())
-            .setUndecorated(false)
-            .setConstants(JFrame.DISPOSE_ON_CLOSE)
             .createWindow()),
     RESTART(new Window.Builder()
             .setName("Restart")

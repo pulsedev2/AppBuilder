@@ -111,7 +111,7 @@ public class UiUtils {
         // Close image computing
         BufferedImage closeImage = UiUtils.imageIconToBufferedImage(new ImageIcon(Main.RESOURCES_PATH + "images/close.png"));
         UiUtils.changeColor(closeImage, Color.BLACK, Theme.USER.themesInterface.getTEXT());
-        closeImage = UiUtils.resize(closeImage, 15, 15);
+        closeImage = UiUtils.resize(closeImage, 20, 20);
         close.setIcon(new ImageIcon(closeImage));
 
         close.setFocusable(false);
