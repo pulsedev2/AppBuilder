@@ -137,6 +137,7 @@ public class HorizontalBar extends JPanel {
         }
 
         this.add(this.MENU_BAR);
+        this.MENU_BAR.updateUI();
     }
 
     @Override
